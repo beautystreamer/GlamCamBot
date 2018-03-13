@@ -30,7 +30,7 @@ extension Droplet {
         analytics?.logDebug("Entered - subscribe selected flow. Subscribe user.")
         subscriber.setStatus(.subscribed)
         subscriber.saveIfNedeed()
-        self.send(message: "You are subscribed.",
+        self.send(message: "Awesome! You have entered for a chance to be on the next show, we will keep you posted.",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
         analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
@@ -50,9 +50,14 @@ extension Droplet {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
         
-        let message = "Hi, \(subscriber.first_name)! \n\nWelcome to Bot!"
-        self.send(message: message,
-                  senderId: subscriber.fb_messenger_id,
-                  messagingType: .RESPONSE)
+        if let imageAttachmentId = self.getAttachmentIdFor(url: "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg") {
+            self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+        }
+        
+        let descriptionSentences = ["Hey \(subscriber.first_name)!", "Thanks for watching the TailorMadeJane glamcam show."]
+        let quickReplies = [Reply.optInNextShow()]
+        self.sendResponseWithTyping(messages: descriptionSentences,
+                                    senderId: subscriber.fb_messenger_id,
+                                    quickReplies: quickReplies)
     }
 }

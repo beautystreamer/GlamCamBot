@@ -6,6 +6,8 @@ import Jay
 import Dispatch
 import SMTP
 
+
+
 extension Droplet {
     
     public func updateMessengerProfileWith(payload: [String: Any]) {
@@ -30,7 +32,7 @@ extension Droplet {
     func setupBotRoutes() throws {
         DjangoDateFormat.dateFormat = "yyyy-MM-dd"
         USDateFormat.dateFormat = "MM/dd/yyyy"
-        
+    
         get("test") { req in
             return Response(status: Status(statusCode: 200))
         }

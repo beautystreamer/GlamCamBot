@@ -17,8 +17,6 @@ final public class Subscriber: Model {
     public let timezone: Int
     public let gender: String
     
-    public var zodiac_sign: String?
-    public var phone_number: Int?
     public var status: String?
     public var did_act_on_broadcast_message: Bool = false
     public var last_interaction_with_bot_at: Int?
@@ -65,8 +63,6 @@ final public class Subscriber: Model {
         locale = try row.get("locale")
         timezone = try row.get("timezone")
         gender = try row.get("gender")
-        zodiac_sign = try row.get("zodiac_sign")
-        phone_number = try row.get("phone_number")
         status = try row.get("status")
         last_first_card_selected = try row.get("last_first_card_selected")
         last_interaction_with_bot_at = try row.get("last_interaction_with_bot_at")
@@ -91,8 +87,6 @@ final public class Subscriber: Model {
         try row.set("locale", locale)
         try row.set("timezone", timezone)
         try row.set("gender", gender)
-        try row.set("zodiac_sign", zodiac_sign)
-        try row.set("phone_number", phone_number)
         try row.set("status", status)
         try row.set("last_first_card_selected", last_first_card_selected)
         try row.set("last_interaction_with_bot_at", last_interaction_with_bot_at)
@@ -121,10 +115,6 @@ final public class Subscriber: Model {
             "replied_to_greeting": self.replied_to_greeting
         ]
         
-        if let result = self.zodiac_sign {
-            dict["zodiac_sign"] = result
-        }
-
         dict["last_first_card_selected"] = last_first_card_selected
         dict["last_interaction_with_bot_at"] = last_interaction_with_bot_at
         dict["last_broadcast_status"] = last_broadcast_status
@@ -145,10 +135,9 @@ final public class Subscriber: Model {
         return dict
     }
     
-    static public func getSubscriberWith(zodiacSign: String, limit: Int, lastBroadcastSentBeforeDate: Int, timeZone: Int) -> ([Subscriber]?) {
+    static public func getSubscriberWith(limit: Int, lastBroadcastSentBeforeDate: Int, timeZone: Int) -> ([Subscriber]?) {
         do {
             let results = try Subscriber.makeQuery()
-                .filter("zodiac_sign" == zodiacSign)
                 .filter("last_broadcast_message_sent_at" <= lastBroadcastSentBeforeDate)
                 .filter("timezone" == timeZone)
                 .filter("status" != SubscriberStatus.unsubscribed.rawValue)
@@ -162,10 +151,9 @@ final public class Subscriber: Model {
         return nil
     }
     
-    static public func getSubscriberWith(zodiacSign: String, lastBroadcastSentBeforeDate: Int, timeZone: Int, closure: (([Subscriber]) -> ())) {
+    static public func getSubscriberWith(lastBroadcastSentBeforeDate: Int, timeZone: Int, closure: (([Subscriber]) -> ())) {
         do {
             try Subscriber.makeQuery()
-                .filter("zodiac_sign" == zodiacSign)
                 .filter("last_broadcast_message_sent_at" <= lastBroadcastSentBeforeDate)
                 .filter("timezone" == timeZone)
                 .filter("status" != SubscriberStatus.unsubscribed.rawValue)
@@ -233,8 +221,6 @@ extension Subscriber: Preparation {
             subscribers.string("locale")
             subscribers.string("timezone")
             subscribers.string("gender")
-            subscribers.string("zodiac_sign", length: 255, optional: true, unique: false, default: nil)
-            subscribers.int("phone_number", optional: true, unique: false, default: nil)
             subscribers.string("status", length: 255, optional: true, unique: false, default: nil)
             subscribers.string("last_first_card_selected", optional: true, unique: false, default: nil)
             subscribers.int("last_interaction_with_bot_at", optional: false, unique: false, default: 0)
@@ -284,13 +270,6 @@ public extension Subscriber {
 }
 
 public extension Subscriber {
-    public func setSign(_ sign: String) {
-        guard self.zodiac_sign != sign else { return }
-        
-        self.zodiac_sign = sign
-        self.isNeedToSave = true
-    }
-    
     public func setStatus(_ status: SubscriberStatus) {
         if self.status != status.rawValue {
             self.status = status.rawValue

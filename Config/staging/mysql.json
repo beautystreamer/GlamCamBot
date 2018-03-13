@@ -1,6 +1,8 @@
 {
-    "hostname": "host",
+    "hostname": "glamcam.cuipffv60pky.us-west-2.rds.amazonaws.com",
     "user": "admin",
-    "password": "password",
-    "database": "staging_database"
+    "password": "Cup1sfu112018",
+    "database": "glamcambot_staging"
 }
+
+
