@@ -1,8 +1,7 @@
 {
-    "hostname": "glamcam.cuipffv60pky.us-west-2.rds.amazonaws.com",
+    "hostname": "django-backend-prod.czraknnuzwlw.us-west-1.rds.amazonaws.com",
     "user": "admin",
-    "password": "Cup1sfu112018",
-    "database": "glamcambot_staging"
+    "password": "Cup1sfu112007",
+    "database": "test_load_db"
 }
-
 
