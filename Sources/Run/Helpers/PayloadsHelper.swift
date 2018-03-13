@@ -32,7 +32,7 @@ public extension Droplet {
                                         "subtitle": subtitle,
                                         "image_url": imageUrl,
                                         "buttons": [button]]
-        return [elements]
+        return elements
     }
     
     func broadcastCreativeMessageJSON(title: String, imageUrl: String, subtitle: String, linkUrl: String, linkTitle: String) -> [String: Any] {
