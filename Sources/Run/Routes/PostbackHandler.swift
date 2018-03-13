@@ -9,7 +9,8 @@ extension Droplet {
         
         if postback == POSTBACK_GET_STARTED {
             self.handleNewUserFlow(subscriber: subscriber)
-            
+        } else if postback == POSTBACK_BOT_COUNT_ME_IN {
+            handleSubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_UNSUBSCRIBE_RESUBSCRIBE {
             handleUnsubscribeResubscribe(subscriber: subscriber)
             
@@ -50,14 +51,10 @@ extension Droplet {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
         
-        if let imageAttachmentId = self.getAttachmentIdFor(url: "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg") {
-            self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
-        }
-        
-        let descriptionSentences = ["Hey \(subscriber.first_name)!", "Thanks for watching the TailorMadeJane glamcam show."]
-        let quickReplies = [Reply.optInNextShow()]
-        self.sendResponseWithTyping(messages: descriptionSentences,
-                                    senderId: subscriber.fb_messenger_id,
-                                    quickReplies: quickReplies)
+        let greeting = joinNextShowGeneric(subscriber: subscriber)
+        let attachment = self.genericAttachment(elements: [greeting])
+        self.send(attachment: attachment,
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .RESPONSE)
     }
 }

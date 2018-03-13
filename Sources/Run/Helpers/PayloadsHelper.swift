@@ -18,6 +18,25 @@ public extension Droplet {
         ]
     }
     
+    func joinNextShowGeneric(subscriber: Subscriber) -> [String: Any] {
+        let title = "Hey \(subscriber.first_name)"
+        let subtitle = "Thanks for watching the TailorMadeJane GLAMCAM show"
+        let buttonTitle = "Join the next show"
+        let url = "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg"
+        return carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttonTitle: buttonTitle)
+    }
+    
+    func carouselElement(title: String, imageUrl: String, subtitle: String, buttonTitle: String) -> [String: Any] {
+        let button = ["type": "postback", "title": buttonTitle, "payload": POSTBACK_BOT_COUNT_ME_IN ]
+        let elements: [String : Any] = ["title": title,
+                                        "subtitle": subtitle,
+                                        "image_url": imageUrl,
+                                        "buttons": [button]]
+        let attachment = genericShortAttachment(elements: [elements])
+        
+        return ["messages": [attachment]]
+    }
+    
     func broadcastCreativeMessageJSON(title: String, imageUrl: String, subtitle: String, linkUrl: String, linkTitle: String) -> [String: Any] {
         let button = ["type": "web_url", "url": linkUrl, "title": linkTitle]
         let elements: [String : Any] = ["title": title,

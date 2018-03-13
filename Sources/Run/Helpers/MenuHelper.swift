@@ -10,10 +10,6 @@ extension Droplet {
     
     func getStartedJSON() -> [String: Any] {
         return ["get_started":["payload":POSTBACK_GET_STARTED],
-                "persistent_menu":[["locale":"default",
-                                    "composer_input_disabled": false,
-                                    "call_to_actions":[unsubscribeResubscribeMenuItem()],
-                                    ]]
         ]
     }
 }
