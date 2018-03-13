@@ -32,9 +32,7 @@ public extension Droplet {
                                         "subtitle": subtitle,
                                         "image_url": imageUrl,
                                         "buttons": [button]]
-        let attachment = genericShortAttachment(elements: [elements])
-        
-        return ["messages": [attachment]]
+        return genericShortAttachment(elements: [elements])
     }
     
     func broadcastCreativeMessageJSON(title: String, imageUrl: String, subtitle: String, linkUrl: String, linkTitle: String) -> [String: Any] {

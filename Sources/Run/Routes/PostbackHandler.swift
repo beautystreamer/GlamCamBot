@@ -52,8 +52,8 @@ extension Droplet {
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
         
         let greeting = joinNextShowGeneric(subscriber: subscriber)
-        let attachment = self.genericAttachment(elements: [greeting])
-        self.send(attachment: attachment,
+        
+        self.send(attachment: greeting,
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }
