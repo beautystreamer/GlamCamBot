@@ -51,9 +51,11 @@ extension Droplet {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
         
-        let greeting = joinNextShowGeneric(subscriber: subscriber)
-        self.send(attachment: self.genericAttachment(elements: [greeting]),
-                  senderId: subscriber.fb_messenger_id,
-                  messagingType: .RESPONSE)
+        if let imageAttachmentId = self.getAttachmentIdFor(url: "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg") {
+            self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+        }
+        
+        let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
+        self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
     }
 }

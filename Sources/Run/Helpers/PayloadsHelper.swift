@@ -19,7 +19,7 @@ public extension Droplet {
     }
     
     func joinNextShowGeneric(subscriber: Subscriber) -> [String: Any] {
-        let title = "Hey \(subscriber.first_name)"
+        let title = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
         let subtitle = "Thanks for watching the TailorMadeJane GLAMCAM show"
         let buttonTitle = "Join the next show"
         let url = "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg"
