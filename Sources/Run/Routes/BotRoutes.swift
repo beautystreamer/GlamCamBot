@@ -92,6 +92,8 @@ extension Droplet {
         guard eventMessage["message"]?["is_echo"] == nil else { return }
         
         if let subscriber = Subscriber.getSubFor(senderId: senderId) {
+            
+            
             if let quickReplyPayload = eventMessage["message"]?["quick_reply"]?["payload"]?.string {
                 handleQuickReply(payload: quickReplyPayload, subscriber: subscriber)
             } else if let postbackPayload = eventMessage["postback"]?["payload"]?.string {
@@ -104,6 +106,8 @@ extension Droplet {
                 } else {
                     analytics?.logDebug("Entered - incoming message is nil and attachments is nil. Ignore this message.")
                 }
+            } else if eventMessage["delivery"] == nil {
+                self.handleNewUserFlow(subscriber: subscriber)
             }
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
             
