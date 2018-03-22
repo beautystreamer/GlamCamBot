@@ -23,7 +23,28 @@ final class TestCustomCommand: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        analytics?.logDebug("run test_command")
+//        analytics?.logDebug("run test_command")
+
+//        Failed to get user for 1850326234979570, with response = Response
+//        Failed to get user for 1717736071640715, with response = Response
+//        Failed to get user for 1931060236906687, with response = Response
+//        Failed to get user for 2082429255106513, with response = Response
+//        Failed to get user for 2082429255106513, with response = Response
+//        Failed to get user for 1687492171316662, with response = Response
+//        Failed to get user for 1687492171316662, with response = Response
+//        Failed to get user for 1556608927789238, with response = Response
+//        Failed to get user for 1768205673237082, with response = Response
+//        Failed to get user for 1452910868129020, with response = Response
+//        Failed to get user for 1452910868129020, with response = Response
+//        Failed to get user for 1863033630388135, with response = Response
+//        Failed to get user for 1490026004441683, with response = Response
+//        Failed to get user for 1552854668146890, with response = Response
+//        Failed to get user for 1722227064490817, with response = Response
+//        Failed to get user for 1609853845803000, with response = Response
+//        Failed to get user for 1781068298623141, with response = Response
+//        Failed to get user for 1768205673237082, with response = Response
+//        Failed to get user for 2096457477037518, with response = Response
+        drop.handleNewUserFlow(fb_messenger_id: "1931060236906687", user_ref: "HannaLee")
     }
 }
 

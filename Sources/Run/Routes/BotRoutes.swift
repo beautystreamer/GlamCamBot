@@ -92,8 +92,6 @@ extension Droplet {
         guard eventMessage["message"]?["is_echo"] == nil else { return }
         
         if let subscriber = Subscriber.getSubFor(senderId: senderId) {
-            
-            
             if let quickReplyPayload = eventMessage["message"]?["quick_reply"]?["payload"]?.string {
                 handleQuickReply(payload: quickReplyPayload, subscriber: subscriber)
             } else if let postbackPayload = eventMessage["postback"]?["payload"]?.string {
@@ -112,7 +110,7 @@ extension Droplet {
             }
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
             
-        } else {
+        } else if eventMessage["delivery"] == nil, let incomingMessage = eventMessage["message"], incomingMessage["is_echo"] == nil {
             // assuming brand new user from ad or get started (i.e. #1, #2)
             guard let subscriber = getSubOrUserProfileFor(senderId: senderId) else {
                 analytics?.logError("Failed to start onboarding flow")
