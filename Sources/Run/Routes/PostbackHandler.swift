@@ -50,9 +50,18 @@ extension Droplet {
     public func handleNewUserFlow(subscriber: Subscriber) {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
-        
-        if let imageAttachmentId = self.getAttachmentIdFor(url: "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg") {
-            self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+
+        if let refId = subscriber.last_referral_id {
+            let refDict = [
+                "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
+                "tailormadejane": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wajc05gt0146mzhwfbo3",
+                "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
+                "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
+                ]
+//            "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg"
+            if let url=refDict[refId], let imageAttachmentId = self.getAttachmentIdFor(url: url) {
+                self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+            }
         }
         
         let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"

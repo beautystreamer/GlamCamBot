@@ -294,6 +294,7 @@ public extension Subscriber {
     }
     
     public func setLastReferral(refId: String, refType: String, refSource: String) {
+        analytics?.logDebug("refId=\(refId), refType=\(refType), refSource=\(refSource)")
         self.last_referral_id = refId
         self.last_referral_type = refType
         self.last_referral_source = refSource
