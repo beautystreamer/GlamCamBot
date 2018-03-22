@@ -3,12 +3,12 @@ import Vapor
 
 extension Droplet {
     
-    func handlePostback(payload: String, subscriber: Subscriber) {
+    func handlePostback(payload: String, subscriber: Subscriber, user_ref: String?) {
         analytics?.logDebug("Payload = \(payload)")
         let postback = String(payload.split(separator: "|")[0])
         
         if postback == POSTBACK_GET_STARTED {
-            self.handleNewUserFlow(subscriber: subscriber)
+            self.handleNewUserFlow(subscriber: subscriber, user_ref: user_ref)
         } else if postback == POSTBACK_BOT_COUNT_ME_IN {
             handleSubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_UNSUBSCRIBE_RESUBSCRIBE {
@@ -47,19 +47,18 @@ extension Droplet {
         analytics?.logAnalytics(event: .UnsubscribeRequested, for: subscriber)
     }
     
-    public func handleNewUserFlow(subscriber: Subscriber) {
+    public func handleNewUserFlow(subscriber: Subscriber, user_ref: String?) {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
 
-        if let refId = subscriber.last_referral_id {
+        if let ref = user_ref {
             let refDict = [
                 "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
                 "tailormadejane": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wajc05gt0146mzhwfbo3",
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 ]
-//            "https://app.box.com/shared/static/y1369a70mnozspnmwmcr2d1nm1tmwx95.jpg"
-            if let url=refDict[refId], let imageAttachmentId = self.getAttachmentIdFor(url: url) {
+            if let url=refDict[ref], let imageAttachmentId = self.getAttachmentIdFor(url: url) {
                 self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
             }
         }

@@ -97,7 +97,8 @@ extension Droplet {
             if let quickReplyPayload = eventMessage["message"]?["quick_reply"]?["payload"]?.string {
                 handleQuickReply(payload: quickReplyPayload, subscriber: subscriber)
             } else if let postbackPayload = eventMessage["postback"]?["payload"]?.string {
-                handlePostback(payload: postbackPayload, subscriber: subscriber)
+                handlePostback(payload: postbackPayload, subscriber: subscriber, user_ref: eventMessage["optin.ref"]?.string)
+
             } else if let incomingMessage = eventMessage["message"], incomingMessage["is_echo"] == nil {
                 if let actualText = incomingMessage["text"]?.string {
                     handleIncomeMessage(subscriber: subscriber, incomingMessage: actualText)
@@ -107,7 +108,7 @@ extension Droplet {
                     analytics?.logDebug("Entered - incoming message is nil and attachments is nil. Ignore this message.")
                 }
             } else if eventMessage["delivery"] == nil {
-                self.handleNewUserFlow(subscriber: subscriber)
+                self.handleNewUserFlow(subscriber: subscriber, user_ref: eventMessage["optin.ref"]?.string)
             }
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
             
@@ -117,7 +118,7 @@ extension Droplet {
                 analytics?.logError("Failed to start onboarding flow")
                 return
             }
-            self.handleNewUserFlow(subscriber: subscriber)
+            self.handleNewUserFlow(subscriber: subscriber, user_ref: eventMessage["optin.ref"]?.string)
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
         }
     }
