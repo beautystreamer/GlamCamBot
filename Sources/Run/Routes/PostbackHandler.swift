@@ -49,7 +49,7 @@ extension Droplet {
     
     public func handleNewUserFlow(subscriber: Subscriber, user_ref: String?) {
         analytics?.logDebug("Entered - new user flow")
-        analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber)
+        analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber, eventValue: user_ref)
 
         if let ref = user_ref {
             let refDict = [

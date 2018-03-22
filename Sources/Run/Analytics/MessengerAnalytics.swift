@@ -25,9 +25,9 @@ public class MessengerAnalytics {
     
     let fbEndpoint = "activities"
     let fbAnalyticsEvent = "CUSTOM_APP_EVENTS"
-    let kibanaHost = "ip_adress:8080"
+    let kibanaHost = "54.244.207.105:8080"
     let kibanaEndpoint = "events"
-    let kibanaAuthorization = "Token"
+    let kibanaAuthorization = "Basic Z2xhbWNhbTpHbEBtZEB0QA=="
     
     public init(config: Vapor.Config, responder: Responder) {
         let appID = MessengerAnalytics.getAppID(config)
@@ -65,7 +65,7 @@ public class MessengerAnalytics {
         logAnalytics(event: AnalyticsEvent.IncomingMessage.rawValue, for: subscriber, details: details)
     }
     
-    public func logAnalytics(event: AnalyticsEvent, for subscriber: Subscriber, eventValue: String? = nil) {
+    public func logAnalytics(eventString: String, for subscriber: Subscriber, eventValue: String? = nil) {
         if self.isAnalyticsDisabled {
             return
         }
@@ -75,9 +75,25 @@ public class MessengerAnalytics {
             details["event_value"] = value
         }
         
-        logAnalytics(event: event.rawValue, for: subscriber, details: details)
+        logAnalytics(event: eventString, for: subscriber, details: details)
     }
-
+    
+    public func logAnalytics(event: AnalyticsEvent, for subscriber: Subscriber, eventValue: String? = nil) {
+        logAnalytics(eventString: event.rawValue,
+                     for: subscriber,
+                     eventValue: eventValue)
+    }
+    
+    public func logEvent(eventString: String, for subscriber: Subscriber, withIntValue value: Int) {
+        if self.isAnalyticsDisabled {
+            return
+        }
+        
+        logAnalytics(event: eventString,
+                     for: subscriber,
+                     details: ["event_int_value": value])
+    }
+    
     public func logEvent(event: AnalyticsEvent, withIntValue value: Int) {
         var payload: [String: Any] = [:]
         
@@ -93,7 +109,7 @@ public class MessengerAnalytics {
         let url = self.kibanaAnalytics.elkURL(index: index, eventId: eventId)
         self.kibanaAnalytics.writeKibanaEntry(url: url, event: payload)
     }
-
+    
     
     public func logEvent(event: AnalyticsEvent, withValue value: String) {
         var payload: [String: Any] = [:]
@@ -204,3 +220,4 @@ extension MessengerAnalytics {
         return result!
     }
 }
+
