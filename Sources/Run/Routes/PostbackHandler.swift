@@ -46,11 +46,11 @@ extension Droplet {
                   messagingType: .RESPONSE)
         analytics?.logAnalytics(event: .UnsubscribeRequested, for: subscriber)
     }
-    
-    public func handleNewUserFlow(subscriber: Subscriber, user_ref: String?) {
-        analytics?.logDebug("Entered - new user flow")
-        analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber, eventValue: user_ref)
 
+    public func handleNewUserFlow(fb_messenger_id: String, user_ref: String?) {
+        analytics?.logDebug("Entered - new user flow")
+        analytics?.logEvent(eventString: fb_messenger_id, withValue: user_ref ?? "")
+       
         if let ref = user_ref {
             let refDict = [
                 "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
@@ -59,11 +59,33 @@ extension Droplet {
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 ]
             if let url=refDict[ref], let imageAttachmentId = self.getAttachmentIdFor(url: url) {
-                self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+                self.send(attachmentId: imageAttachmentId, senderId: fb_messenger_id, messagingType: .RESPONSE)
             }
         }
         
-        let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
-        self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+        let message = "Hey, thanks for signing up to be on the next show"
+        self.send(message: message, senderId: fb_messenger_id, messagingType: .RESPONSE)
+    }
+
+    
+    public func handleNewUserFlow(subscriber: Subscriber, user_ref: String?) {
+        handleNewUserFlow(fb_messenger_id: subscriber.fb_messenger_id, user_ref: user_ref)
+//        analytics?.logDebug("Entered - new user flow")
+//        analytics?.logAnalytics(event: .NewUserRegistered, for: subscriber, eventValue: user_ref)
+//
+//        if let ref = user_ref {
+//            let refDict = [
+//                "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
+//                "tailormadejane": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wajc05gt0146mzhwfbo3",
+//                "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
+//                "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
+//                ]
+//            if let url=refDict[ref], let imageAttachmentId = self.getAttachmentIdFor(url: url) {
+//                self.send(attachmentId: imageAttachmentId, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+//            }
+//        }
+//
+//        let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
+//        self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
     }
 }

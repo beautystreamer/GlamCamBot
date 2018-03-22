@@ -116,6 +116,7 @@ extension Droplet {
             // assuming brand new user from ad or get started (i.e. #1, #2)
             guard let subscriber = getSubOrUserProfileFor(senderId: senderId) else {
                 analytics?.logError("Failed to start onboarding flow")
+                self.handleNewUserFlow(fb_messenger_id: senderId, user_ref: eventMessage["optin.ref"]?.string)
                 return
             }
             self.handleNewUserFlow(subscriber: subscriber, user_ref: eventMessage["optin.ref"]?.string)

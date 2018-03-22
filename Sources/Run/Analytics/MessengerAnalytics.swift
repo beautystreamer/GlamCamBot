@@ -111,6 +111,22 @@ public class MessengerAnalytics {
     }
     
     
+    public func logEvent(eventString: String, withValue value: String) {
+        var payload: [String: Any] = [:]
+        
+        payload["event_value"] = value
+        
+        payload["event_type"] = eventString
+        
+        let timestamp = Int(Date().timeIntervalSince1970*1000)
+        payload["date"] = timestamp
+        let eventId = "\(eventString)_\(timestamp)"
+        let index = self.analyticsIndexName
+        
+        let url = self.kibanaAnalytics.elkURL(index: index, eventId: eventId)
+        self.kibanaAnalytics.writeKibanaEntry(url: url, event: payload)
+    }
+    
     public func logEvent(event: AnalyticsEvent, withValue value: String) {
         var payload: [String: Any] = [:]
         
