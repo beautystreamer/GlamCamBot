@@ -110,7 +110,7 @@ extension Droplet {
             }
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
             
-        } else if eventMessage["delivery"] == nil, let incomingMessage = eventMessage["message"], incomingMessage["is_echo"] == nil {
+        } else if eventMessage["delivery"] == nil {
             // assuming brand new user from ad or get started (i.e. #1, #2)
             guard let subscriber = getSubOrUserProfileFor(senderId: senderId) else {
                 analytics?.logError("Failed to start onboarding flow")
