@@ -17,6 +17,7 @@ public extension Droplet {
             ]
         ]
     }
+
     
     func joinNextShowGeneric(subscriber: Subscriber) -> [String: Any] {
         let title = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"

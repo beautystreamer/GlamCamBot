@@ -42,7 +42,7 @@ final class TestCustomCommand: Command, ConfigInitializable {
 //        Failed to get user for 1781068298623141, with response = Response
 //        Failed to get user for 1768205673237082, with response = Response
 //        Failed to get user for 2096457477037518, with response = Response
-        drop.handleNewUserFlow(fb_messenger_id: "1687492171316662", user_ref: "HannaLee")
+        drop.handleNewUserFlow(fb_messenger_id: "1830879046992212", user_ref: "HannaLee")
     }
 }
 
