@@ -33,16 +33,18 @@ final class TestCustomCommand: Command, ConfigInitializable {
 //        Failed to get user for 1556608927789238, with response = Response
 //        Failed to get user for 1768205673237082, with response = Response
 //        Failed to get user for 1452910868129020, with response = Response
-//        Failed to get user for 1452910868129020, with response = Response
 //        Failed to get user for 1863033630388135, with response = Response
 //        Failed to get user for 1490026004441683, with response = Response
 //        Failed to get user for 1552854668146890, with response = Response
 //        Failed to get user for 1722227064490817, with response = Response
 //        Failed to get user for 1609853845803000, with response = Response
 //        Failed to get user for 1781068298623141, with response = Response
-//        Failed to get user for 1768205673237082, with response = Response
 //        Failed to get user for 2096457477037518, with response = Response
-        drop.handleNewUserFlow(fb_messenger_id: "1830879046992212", user_ref: "HannaLee")
+        // 1752607618137334
+        // 1762412400447427
+//        Failed to get user for 1703283119733003, with response = Response
+//        Failed to get user for 1518599604917918, with response = Response
+        drop.handleNewUserFlow(fb_messenger_id: "1703283119733003", user_ref: "HannaLee")
     }
 }
 
