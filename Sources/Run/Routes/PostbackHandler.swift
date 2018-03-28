@@ -52,13 +52,11 @@ extension Droplet {
         analytics?.logEvent(eventString: fb_messenger_id, withValue: user_ref ?? "")
        
         
-        let title = "Hey, thanks for signing up to be on the next show"
-        
-        
         if let ref = user_ref {
             let refDict = [
                 "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
-                "tailormadejane": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wajc05gt0146mzhwfbo3",
+//                "tailormadejane": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wajc05gt0146mzhwfbo3",
+                "tailormadejane": "https://app.box.com/shared/static/jpy2almizs84quzz06xvfrnxbiulzadu.png",
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 ]
@@ -72,8 +70,11 @@ extension Droplet {
             
             let name = nameDict[ref] ?? ""
             
-            let subtitle = "Thanks for watching the \(name) GLAMCAM show"
-            let buttonTitle = "Join the next show"
+            
+            
+            let title = (ref == "tailormadejane")  ? "TAILORMADEJANE GIVEAWAY!" :  "Hey, thanks for signing up to be on the next show"
+            let subtitle = (ref == "tailormadejane")  ? "2 Jaclyn hill pallete 1 morphe 350" : "Thanks for watching the \(name) GLAMCAM show"
+            let buttonTitle = (ref == "tailormadejane")  ? "Enter The Giveaway": "Join the next show"
 
             if let url = refDict[ref] {
                 let greeting = carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttonTitle: buttonTitle)
