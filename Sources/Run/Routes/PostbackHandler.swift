@@ -73,7 +73,7 @@ extension Droplet {
             
             
             let title = (ref == "tailormadejane")  ? "TAILORMADEJANE GIVEAWAY!" :  "Hey, thanks for signing up to be on the next show"
-            let subtitle = (ref == "tailormadejane")  ? "2 Jaclyn hill pallete 1 morphe 350" : "Thanks for watching the \(name) GLAMCAM show"
+            let subtitle = (ref == "tailormadejane")  ? "2 Jaclyn hill pallets 1 morphe 350" : "Thanks for watching the \(name) GLAMCAM show"
             let buttonTitle = (ref == "tailormadejane")  ? "Enter The Giveaway": "Join the next show"
 
             if let url = refDict[ref] {
