@@ -8,6 +8,27 @@ import Foundation
 let NOTIFICATION_HOUR = 9
 let SECONDS_IN_HOUR: TimeInterval = 60 * 60
 
+final class CreateSessionCommand: Command, ConfigInitializable {
+    public let id = "create_session"
+    public let help = ["This command creates opentok session for live video user"]
+    public let console: ConsoleProtocol
+    
+    public init(console: ConsoleProtocol) {
+        self.console = console
+    }
+    
+    public convenience init(config: Config) throws {
+        let console = try config.resolveConsole()
+        self.init(console: console)
+    }
+    
+    public func run(arguments: [String]) throws {
+        // no need for location
+        // no need for p2p2
+//        let url = "https://api.opentok.com/session/create"
+    }
+}
+
 final class TestCustomCommand: Command, ConfigInitializable {
     public let id = "test_command"
     public let help = ["This command does things, like foo, and bar."]
