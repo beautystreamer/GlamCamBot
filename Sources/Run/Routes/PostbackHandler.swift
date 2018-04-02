@@ -50,7 +50,8 @@ extension Droplet {
     public func handleNewUserFlow(fb_messenger_id: String, user_ref: String?) {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logEvent(eventString: fb_messenger_id, withValue: user_ref ?? "")
-       
+
+        let giveaway = "giveaway_giveaway"       
         
         if let ref = user_ref {
             let refDict = [
@@ -59,14 +60,14 @@ extension Droplet {
                 "tailormadejane": "https://app.box.com/shared/static/jpy2almizs84quzz06xvfrnxbiulzadu.png",
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
-                "giveaway_giveaway": "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg"
+                giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg"
                 ]
             
             var title = ""
             var subtitle = ""
             var buttonTitle = ""
 
-            if ref == "giveaway_giveaways" {
+            if ref == giveaway {
                 title = "GLAMCAM GIVEAWAY!"
                 subtitle = "lots of amazing products"
                 buttonTitle = "Enter The Giveaway"
