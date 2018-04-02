@@ -61,7 +61,7 @@ extension Droplet {
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg",
-                "joshualexmua_giveaway": "https://app.box.com/s/etml9quglqn4alk789p9u9gw7cfkt3vh"
+                "joshalexmua_giveaway": "https://app.box.com/s/etml9quglqn4alk789p9u9gw7cfkt3vh"
                 ]
             
             var title = ""
