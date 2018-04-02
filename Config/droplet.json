@@ -44,6 +44,7 @@
         "update_bot_menu",
         "whitelist_domains",
         "test_command",
+        "create_session",
         "count_subscribers"
     ]
 }

@@ -4,6 +4,7 @@ import FluentProvider
 import Jay
 import Dispatch
 import Foundation
+import HTTP
 
 let NOTIFICATION_HOUR = 9
 let SECONDS_IN_HOUR: TimeInterval = 60 * 60
@@ -25,7 +26,26 @@ final class CreateSessionCommand: Command, ConfigInitializable {
     public func run(arguments: [String]) throws {
         // no need for location
         // no need for p2p2
-//        let url = "https://api.opentok.com/session/create"
+        let url = "https://api.opentok.com/session/create"
+        let jwtHeader: [String: Any] = ["ist": "46092422",
+                                        "iss": "fca937380264e661417c44e3641d7d3d36cb62db",
+                                        "iat": Int(Date().timeIntervalSince1970),
+                                        "exp": Int(Date().addingTimeInterval(SECONDS_IN_HOUR).timeIntervalSince1970),
+                                        "jti": "borisrocks"]
+        
+        let data = Data(try Jay().dataFromJson(anyDictionary: jwtHeader))
+//        let data Data(try! requestJSON.makeBytes()
+        
+        guard let jwtHeaderString = String(data: data, encoding: String.Encoding.utf8) else {
+            return
+        }
+        print(jwtHeaderString)
+        
+        let headers: [HeaderKey: String] = ["Accept": "application/json",
+                                            "X-OPENTOK-AUTH": jwtHeaderString]
+        
+        let result = try drop.client.post(url, query: [:], headers, nil, through: [])
+        print(result)
     }
 }
 

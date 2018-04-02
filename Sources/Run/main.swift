@@ -25,6 +25,8 @@ try config.setup()
 config.addConfigurable(command: WhitelistDomainsCommand.init, name:"whitelist_domains")
 config.addConfigurable(command: UpdateBotMenuCommand.init, name:"update_bot_menu")
 config.addConfigurable(command: TestCustomCommand.init, name: "test_command")
+config.addConfigurable(command: CreateSessionCommand.init, name: "create_session")
+
 config.addConfigurable(command: CountSubscribersCommand.init, name: "count_subscribers")
 
 try config.addProvider(LeafProvider.Provider.self)
