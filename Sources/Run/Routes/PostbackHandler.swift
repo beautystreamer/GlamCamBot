@@ -59,22 +59,31 @@ extension Droplet {
                 "tailormadejane": "https://app.box.com/shared/static/jpy2almizs84quzz06xvfrnxbiulzadu.png",
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
+                "giveaway_giveaways": "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg"
                 ]
+            
+            var title = ""
+            var subtitle = ""
+            var buttonTitle = ""
 
-            let nameDict = [
-                "HannaLee": "HannaLee",
-                "tailormadejane": "TAILORMADEJANE",
-                "victoriajameson": "Victoria Jameson",
-                "princessbellaaa": "Princess Bellaaa",
-            ]
-            
-            let name = nameDict[ref] ?? ""
-            
-            
-            
-            let title = (ref == "tailormadejane")  ? "TAILORMADEJANE GIVEAWAY!" :  "Hey, thanks for signing up to be on the next show"
-            let subtitle = (ref == "tailormadejane")  ? "2 Jaclyn hill pallets 1 morphe 350" : "Thanks for watching the \(name) GLAMCAM show"
-            let buttonTitle = (ref == "tailormadejane")  ? "Enter The Giveaway": "Join the next show"
+            if ref == "giveaway_giveaways" {
+                title = "GLAMCAM GIVEAWAY!"
+                subtitle = "lots of amazing products"
+                buttonTitle = "Enter The Giveaway"
+            } else {
+                let nameDict = [
+                    "HannaLee": "HannaLee",
+                    "tailormadejane": "TAILORMADEJANE",
+                    "victoriajameson": "Victoria Jameson",
+                    "princessbellaaa": "Princess Bellaaa",
+                    ]
+
+                let name = nameDict[ref] ?? ""
+
+                title = (ref == "tailormadejane") ? "TAILORMADEJANE GIVEAWAY!" : "Hey, thanks for signing up to be on the next show"
+                subtitle = (ref == "tailormadejane") ? "2 Jaclyn hill pallets 1 morphe 350" : "Thanks for watching the \(name) GLAMCAM show"
+                buttonTitle = (ref == "tailormadejane") ? "Enter The Giveaway" : "Join the next show"
+            }
 
             if let url = refDict[ref] {
                 let greeting = carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttonTitle: buttonTitle)
