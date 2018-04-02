@@ -60,14 +60,16 @@ extension Droplet {
                 "tailormadejane": "https://app.box.com/shared/static/jpy2almizs84quzz06xvfrnxbiulzadu.png",
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
-                giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg"
+                giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg",
+                "joshualexmua_giveaway": "https://app.box.com/s/etml9quglqn4alk789p9u9gw7cfkt3vh"
                 ]
             
             var title = ""
             var subtitle = ""
             var buttonTitle = ""
 
-            if ref == giveaway {
+
+            if ref == giveaway || ref == "joshalexmua_giveaway" {
                 title = "GLAMCAM GIVEAWAY!"
                 subtitle = "lots of amazing products"
                 buttonTitle = "Enter The Giveaway"
