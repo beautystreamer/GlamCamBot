@@ -64,29 +64,26 @@ final class TestCustomCommand: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-//        analytics?.logDebug("run test_command")
-
-//        Failed to get user for 1850326234979570, with response = Response
-//        Failed to get user for 1717736071640715, with response = Response
-//        Failed to get user for 1931060236906687, with response = Response
-//        Failed to get user for 2082429255106513, with response = Response
-//        Failed to get user for 1687492171316662, with response = Response
-//        Failed to get user for 1556608927789238, with response = Response
-//        Failed to get user for 1768205673237082, with response = Response
-//        Failed to get user for 1452910868129020, with response = Response
-//        Failed to get user for 1863033630388135, with response = Response
-//        Failed to get user for 1490026004441683, with response = Response
-//        Failed to get user for 1552854668146890, with response = Response
-//        Failed to get user for 1722227064490817, with response = Response
-//        Failed to get user for 1609853845803000, with response = Response
-//        Failed to get user for 1781068298623141, with response = Response
-//        Failed to get user for 2096457477037518, with response = Response
-        // 1752607618137334
-        // 1762412400447427
-//        Failed to get user for 1703283119733003, with response = Response
-//        Failed to get user for 1518599604917918, with response = Response
-        drop.handleNewUserFlow(fb_messenger_id: "1703283119733003", user_ref: "HannaLee")
+        let dmitryId = "1692215764199196"
+        
+        drop.send(message: "Check out three lucky giveaway winners", senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        let url = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
+        guard let attachmentId = drop.getAttachmentIdFor(url: url) else {
+            analytics?.logError("Failed to create FB attachment for \(url)")
+            return
+        }
+        drop.send(attachmentId: attachmentId, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        
+        let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
+        drop.send(message: "Do you want to be notified about other giveaways?",
+                  senderId: dmitryId,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
+                  quickReplies: [quickReply])
+        
+        
+        drop.send(attachment: lastTemplate, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
+
 }
 
 final class WhitelistDomainsCommand: Command, ConfigInitializable {
