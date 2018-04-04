@@ -105,12 +105,11 @@ extension Droplet {
                 } else {
                     analytics?.logDebug("Entered - incoming message is nil and attachments is nil. Ignore this message.")
                 }
-            } else if eventMessage["delivery"] == nil {
+            } else if eventMessage["delivery"] == nil && eventMessage["read"] == nil {
                 self.handleNewUserFlow(subscriber: subscriber, user_ref: eventMessage["optin.ref"]?.string)
             }
             self.updateSubscriber(subscriber, withEventMessage: eventMessage)
-            
-        } else if eventMessage["delivery"] == nil {
+        } else if eventMessage["delivery"] == nil && eventMessage["read"] == nil {
             // assuming brand new user from ad or get started (i.e. #1, #2)
             guard let subscriber = getSubOrUserProfileFor(senderId: senderId) else {
                 analytics?.logError("Failed to start onboarding flow")
