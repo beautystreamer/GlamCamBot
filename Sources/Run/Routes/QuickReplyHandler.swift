@@ -24,8 +24,7 @@ extension Droplet {
         
         let button = drop.weblinkButtonTemplate(title: "Follow us on IG",
                                                 url: "https://www.instagram.com/glamcam.live/")
-        
-        let giveawayImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
+        let giveawayImageUrl = "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg"
         let element = drop.getElement(title: "Join more giveaway shows",
                                       subtitle: "",
                                       buttons: [button],

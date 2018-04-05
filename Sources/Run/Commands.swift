@@ -66,32 +66,19 @@ final class TestCustomCommand: Command, ConfigInitializable {
     public func run(arguments: [String]) throws {
         let dmitryId = "1577826605605503"
         
-//        drop.send(message: "Check out three lucky giveaway winners", senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "Check out three lucky giveaway winners", senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         let winnersImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
-//        guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
-//            analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
-//            return
-//        }
-//        drop.send(attachmentId: attachmentId, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-//
-//        let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
-//        drop.send(message: "Do you want to be notified about other giveaways?",
-//                  senderId: dmitryId,
-//                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
-//                  quickReplies: [quickReply])
-//
-        let button = drop.weblinkButtonTemplate(title: "Follow us on IG",
-                                                url: "https://www.instagram.com/glamcam.live/")
+        guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
+            analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
+            return
+        }
+        drop.send(attachmentId: attachmentId, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
 
-        let giveawayImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
-        let element = drop.getElement(title: "Join more giveaway shows",
-                                      subtitle: "",
-                                      buttons: [button],
-                                      imageUrl: giveawayImageUrl)
-        let attachment = drop.genericAttachment(elements: [element])
-        drop.send(attachment: attachment,
+        let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
+        drop.send(message: "Do you want to be notified about other giveaways?",
                   senderId: dmitryId,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
+                  quickReplies: [quickReply])
     }
 
 }
