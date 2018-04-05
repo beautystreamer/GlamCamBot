@@ -14,6 +14,7 @@ public enum AnalyticsEvent: String {
     case TotalSubscribed = "total_subscribed"
     case TotalUnsubscribed = "total_unsubscribed"
     case TotalUsersIgnoringBroadcastsForWeek = "total_users_ignoring_broadcast_for_week"
+    case OptIntoGiveaways = "opt_into_giveaways"
 }
 
 public class MessengerAnalytics {

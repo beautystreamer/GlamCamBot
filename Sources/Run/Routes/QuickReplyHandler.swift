@@ -10,8 +10,29 @@ extension Droplet {
         
         if quickReply == POSTBACK_BOT_COUNT_ME_IN {
             handleSubscribe(subscriber: subscriber)
+        } else if quickReply == QUICK_REPLY_GIVEAWAYS_OPT_IN {
+            handleOptInIntoGiveaways(subscriber: subscriber)
         } else {
             analytics?.logError("Unknown quick reply \(quickReply)")
         }
+    }
+    
+    func handleOptInIntoGiveaways(subscriber: Subscriber) {
+        analytics?.logAnalytics(event: .OptIntoGiveaways, for: subscriber)
+        subscriber.notify_about_giveaways = true
+        subscriber.forceSave()
+        
+        let button = drop.weblinkButtonTemplate(title: "Follow us on IG",
+                                                url: "https://www.instagram.com/glamcam.live/")
+        
+        let giveawayImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
+        let element = drop.getElement(title: "Join more giveaway shows",
+                                      subtitle: "",
+                                      buttons: [button],
+                                      imageUrl: giveawayImageUrl)
+        let attachment = drop.genericAttachment(elements: [element])
+        drop.send(attachment: attachment,
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
 }

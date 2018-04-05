@@ -34,6 +34,7 @@ final public class Subscriber: Model {
     public var last_referral_id: String?
     
     public var replied_to_greeting: Bool = false
+    public var notify_about_giveaways = false
     
     public var id: Identifier? {
         get {
@@ -76,6 +77,7 @@ final public class Subscriber: Model {
         last_referral_source = try row.get("last_referral_source")
         last_referral_type = try row.get("last_referral_type")
         last_referral_id = try row.get("last_referral_id")
+        notify_about_giveaways = try row.get("notify_about_giveaways")
     }
     
     public func makeRow() throws -> Row {
@@ -100,6 +102,7 @@ final public class Subscriber: Model {
         try row.set("last_referral_source", last_referral_source)
         try row.set("last_referral_type", last_referral_type)
         try row.set("last_referral_id", last_referral_id)
+        try row.set("notify_about_giveaways", notify_about_giveaways)
         
         return row
     }
@@ -112,7 +115,8 @@ final public class Subscriber: Model {
             "locale": locale,
             "timezone": timezone,
             "gender": gender,
-            "replied_to_greeting": self.replied_to_greeting
+            "replied_to_greeting": self.replied_to_greeting,
+            "notify_about_giveaways": notify_about_giveaways
         ]
         
         dict["last_first_card_selected"] = last_first_card_selected
@@ -124,6 +128,7 @@ final public class Subscriber: Model {
         dict["last_referral_source"] = last_referral_source
         dict["last_referral_type"] = last_referral_type
         dict["last_referral_id"] = last_referral_id
+        dict["notify_about_giveaways"] = notify_about_giveaways
         
         if let createdDate = self.createdAt {
             let age = Int(Date().timeIntervalSince(createdDate) / (60 * 60 * 24))
@@ -234,6 +239,7 @@ extension Subscriber: Preparation {
             subscribers.string("last_referral_source", length: 255, optional: true, unique: false, default: nil)
             subscribers.string("last_referral_type", length: 255, optional: true, unique: false, default: nil)
             subscribers.string("last_referral_id", length: 255, optional: true, unique: false, default: nil)
+            subscribers.bool("notify_about_giveaways", optional: false, unique: false, default: false)
         }
     }
     
@@ -304,6 +310,15 @@ public extension Subscriber {
     public func setRepliedToGreeting(_ isReplied: Bool) {
         self.replied_to_greeting = isReplied
         self.isNeedToSave = true
+    }
+    
+    public func forceSave() {
+        do {
+            try self.save()
+            self.isNeedToSave = false
+        } catch let error {
+            print("Failed to save user for \(fb_messenger_id), error=\(error)")
+        }
     }
     
     public func saveIfNedeed() {

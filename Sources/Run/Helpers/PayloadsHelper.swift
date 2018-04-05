@@ -18,7 +18,23 @@ public extension Droplet {
         ]
     }
 
+    func weblinkButtonTemplate(title: String, url: String) -> [String: Any] {
+        return ["type": "web_url",
+                "url": url,
+                "title": title,
+                "webview_height_ratio": "full",
+                "messenger_extensions": true]
+    }
     
+    func buttonFor(zodiac: String, shouldChangeSign: Bool = false) -> [String: Any] {
+        let title = "\(zodiac)"
+        return ["type": "postback", "title": title, "payload": "\(zodiac)|\(shouldChangeSign)"]
+    }
+    
+    func getElement(title: String, subtitle: String, buttons: [[String: Any]], imageUrl: String) -> [String: Any] {
+        return ["title": title, "subtitle": subtitle, "buttons": buttons, "image_url": imageUrl]
+    }
+
     func joinNextShowGeneric(subscriber: Subscriber) -> [String: Any] {
         let title = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
         let subtitle = "Thanks for watching the TailorMadeJane GLAMCAM show"
