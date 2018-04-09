@@ -1,7 +1,12 @@
 {
-    "fbPageAccessToken": "token",
-    "djangoToken": "token",
+    "fbPageAccessToken": "EAAG6Ugto428BAFBFDnaaENQyVldahyWHf2YWw4bV4iqrbbrPwe6pECVeX9nLDTRAL4M7hW5DVoVle5jjc0HUzaIRVWxnPNcJ12VOKWHV9we2ZAkeIJZBrkNWIHFkfV1CePOAu0ZCjNVwE6UaZCWMMNxgpgnviNGSTPevZBzfkEwZDZD",
+    "fbAppId": "486336518218607",
+    "fbPageId": "1502355666464879",
+    "djangoToken": "Token ",
+    "product_analytics_index": "product_analytics",
     "eng_analytics_index": "eng_analytics",
-    "stripeKey": "stripe key"
+    "bot_host_name": "https://host.com",
+    "stripeKey": "sk_test",
+    "isActiveMode": true
 }
 
