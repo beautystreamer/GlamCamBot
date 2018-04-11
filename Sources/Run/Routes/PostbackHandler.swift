@@ -65,15 +65,15 @@ extension Droplet {
                 "hannalee_giveaway": "https://app.box.com/shared/static/etml9quglqn4alk789p9u9gw7cfkt3vh.png",
                 ]
             
-            var title = ""
-            var subtitle = ""
-            var buttonTitle = ""
+            var title = "GLAMCAM GIVEAWAY!"
+            var subtitle = "lots of amazing products"
+            var buttonTitle = "Enter The Giveaway"
 
 
             if ref == giveaway || ref == "joshalexmua_giveaway" {
-                title = "GLAMCAM GIVEAWAY!"
-                subtitle = "lots of amazing products"
-                buttonTitle = "Enter The Giveaway"
+                // do nothing, default are good
+            } else if ref == "hannalee_giveaway" {
+                subtitle = "Win $50 Sephora gift card"
             } else {
                 let nameDict = [
                     "HannaLee": "HannaLee",
