@@ -62,7 +62,7 @@ extension Droplet {
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg",
                 "joshalexmua_giveaway": "https://app.box.com/shared/static/etml9quglqn4alk789p9u9gw7cfkt3vh.png",
-                "hannalee_giveaway": "https://app.box.com/shared/static/etml9quglqn4alk789p9u9gw7cfkt3vh.png",
+                "hannalee_giveaway": "https://app.box.com/shared/static/7rg06a35ezf6fpn2lewqkvpee4n72a77.png",
                 ]
             
             var title = "GLAMCAM GIVEAWAY!"
