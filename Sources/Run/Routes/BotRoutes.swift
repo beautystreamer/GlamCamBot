@@ -36,6 +36,17 @@ extension Droplet {
         get("test") { req in
             return Response(status: Status(statusCode: 200))
         }
+
+        get("last_subscriber") { req in
+            let subscriber = Subscriber.getLastSubscriber()
+            let dictionary = subscriber!.toDictionary()
+            guard let response = dictionary.toJSON() else {
+                return Response(status: Status(statusCode: 503))
+            }
+
+            let headers = [HeaderKey("Access-Control-Allow-Origin"): "*"]
+            return Response(status: .ok, headers: headers, body: response)
+        }
         
         get("webhook") { req in
             guard let hubVerifyToken = req.data[DotKey("hub.verify_token")]?.string,

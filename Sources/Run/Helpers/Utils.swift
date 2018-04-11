@@ -1,4 +1,5 @@
 import Foundation
+import SwiftSoup
 
 let DjangoDateFormat = DateFormatter()
 let USDateFormat = DateFormatter()
@@ -96,5 +97,39 @@ extension Date {
 extension String {
     var dateFromISO8601: Date? {
         return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+    }
+}
+
+extension Dictionary where Key == String {
+    func toJSON() -> Vapor.JSON? {
+        guard let node = try? self.makeNode(in: jsonContext) else {
+            return nil
+        }
+        return Vapor.JSON(node)
+    }
+}
+
+public extension Vapor.JSON {
+    func toString() -> String? {
+        return try? self.makeBytes().makeString()
+    }
+
+    func toStringDictionary() -> [String: String]? {
+        do {
+            return try self.object?.mapValues({ (oldValue) -> String in
+                guard let newValue = oldValue.string else {
+                    throw Exception.Error(type: .IllegalArgumentException, Message: "IllegalArgumentException \(oldValue)")
+                }
+                return newValue
+            })
+        } catch {
+            return nil
+        }
+    }
+}
+
+extension String {
+    func toJSON() -> Vapor.JSON? {
+        return try? Vapor.JSON(bytes: self.bytes)
     }
 }
