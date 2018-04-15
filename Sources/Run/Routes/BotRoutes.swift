@@ -39,8 +39,14 @@ extension Droplet {
 
         get("last_subscriber") { req in
             let subscriber = Subscriber.getLastSubscriber()
-            let dictionary = subscriber!.toDictionary()
-            guard let response = dictionary.toJSON() else {
+            guard let dictionary = subscriber?.toDictionary() else {
+                return Response(status: Status(statusCode: 503))
+            }
+            let response_dict: [String: Any] = [
+              "first_name": dictionary["first_name"],
+              "last_name": dictionary["last_name"],
+            ]
+            guard let response = response_dict.toJSON() else {
                 return Response(status: Status(statusCode: 503))
             }
 
