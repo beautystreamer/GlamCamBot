@@ -215,6 +215,17 @@ final public class Subscriber: Model {
         }
         return nil
     }
+
+    static public func getLastSubscriber() -> (Subscriber?) {
+        do {
+            let results = try Subscriber.makeQuery().first()
+            return results
+        } catch let error {
+            print("\(#function) Failed execute fluent / node stuff. Error = \(error)")
+        }
+
+        return nil
+    }
 }
 
 extension Subscriber: Preparation {

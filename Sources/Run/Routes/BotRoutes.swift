@@ -5,6 +5,7 @@ import Node
 import Jay
 import Dispatch
 import SMTP
+import ServerSideSwiftExtensions
 
 
 
@@ -35,6 +36,23 @@ extension Droplet {
     
         get("test") { req in
             return Response(status: Status(statusCode: 200))
+        }
+
+        get("last_subscriber") { req in
+            let subscriber = Subscriber.getLastSubscriber()
+            guard let dictionary = subscriber?.toDictionary() else {
+                return Response(status: Status(statusCode: 503))
+            }
+            let response_dict: [String: Any] = [
+              "first_name": dictionary["first_name"],
+              "last_name": dictionary["last_name"],
+            ]
+            guard let response = response_dict.toJSON() else {
+                return Response(status: Status(statusCode: 503))
+            }
+
+            let headers = [HeaderKey("Access-Control-Allow-Origin"): "*"]
+            return Response(status: .ok, headers: headers, body: response)
         }
         
         get("webhook") { req in
