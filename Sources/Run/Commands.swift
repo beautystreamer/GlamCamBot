@@ -64,7 +64,7 @@ final class TestCustomCommand: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        let dmitryId = "1502355666464879"
+        let dmitryId = "1577826605605503"
         
         drop.send(message: "Check out three lucky giveaway winners", senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         let winnersImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
