@@ -16,8 +16,9 @@ let package = Package(
         .package(url: "https://github.com/vapor/leaf-provider.git", .upToNextMajor(from: "1.1.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", .upToNextMajor(from: "1.5.9")),
         .package(url: "https://github.com/bsuvorov/swiftfbbotanalytics.git", .upToNextMajor(from: "1.0.3")),
+        .package(url: "https://github.com/bsuvorov/ServerSideSwift_extensions.git", .upToNextMajor(from: "1.1.6"))
     ],
     targets: [
-        .target(name: "Run", dependencies: ["Vapor", "FluentProvider", "MySQLProvider", "Jay", "LeafProvider", "SwiftyBeaverProvider", "SwiftSoup", "BotAnalytics"]),
+        .target(name: "Run", dependencies: ["Vapor", "FluentProvider", "MySQLProvider", "Jay", "LeafProvider", "SwiftyBeaverProvider", "SwiftSoup", "BotAnalytics", "ServerSideSwiftExtensions"]),
     ]
 )
