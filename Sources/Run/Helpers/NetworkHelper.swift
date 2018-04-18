@@ -2,8 +2,9 @@ import Foundation
 import HTTP
 import JSON
 import Vapor
+import ServerSideSwiftExtensions
 
-let safeMemoryCache = SafeMemoryCache()
+let safeMemoryCache = SafeMemoryCache(dispatchQueueLabel: "MessengerBot.MemoryCache.Queue")
 
 protocol SimpleJSONInitializable {
     init?(json: JSON)
