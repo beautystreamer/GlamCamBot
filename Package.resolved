@@ -141,8 +141,8 @@
         "repositoryURL": "https://github.com/vapor/multipart.git",
         "state": {
           "branch": null,
-          "revision": "8e541b2e6fc64a3741eca2aa48ee2c3f23cbe17c",
-          "version": "2.1.1"
+          "revision": "17c2bf072ae1698aa7d6c96472ff9b4a970c1816",
+          "version": "2.2.0"
         }
       },
       {
@@ -200,12 +200,21 @@
         }
       },
       {
+        "package": "ServerSideSwiftExtensions",
+        "repositoryURL": "https://github.com/bsuvorov/ServerSideSwift_extensions.git",
+        "state": {
+          "branch": null,
+          "revision": "90838ce8661a96179c27faac951bf2ee0a204c08",
+          "version": "1.2.0"
+        }
+      },
+      {
         "package": "Sockets",
         "repositoryURL": "https://github.com/vapor/sockets.git",
         "state": {
           "branch": null,
-          "revision": "a77816695630a44d5d1393fc71eac37ac3d082ca",
-          "version": "2.2.2"
+          "revision": "79fc180cdcb451dbbb01b1156be36720adde80e0",
+          "version": "2.2.3"
         }
       },
       {
@@ -231,8 +240,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "4342ba16c0f88a2637711603a56db57832feabd6",
-          "version": "1.6.3"
+          "revision": "52a9a9e2ae73669111e3f74c7ce833b195e942a3",
+          "version": "1.7.1"
         }
       },
       {
@@ -240,8 +249,8 @@
         "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
         "state": {
           "branch": null,
-          "revision": "f24921e83cc356fce6ee12cb6120ab57896de3d6",
-          "version": "1.5.1"
+          "revision": "2d11db3282ee884bfc37df53677b5fef2def2849",
+          "version": "1.5.2"
         }
       },
       {

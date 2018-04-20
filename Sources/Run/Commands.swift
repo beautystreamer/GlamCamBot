@@ -9,6 +9,9 @@ import HTTP
 let NOTIFICATION_HOUR = 9
 let SECONDS_IN_HOUR: TimeInterval = 60 * 60
 
+let fbIdLilia = "1967947763279176"
+let fbIdDmitry = "1547115702068142"
+
 final class CreateSessionCommand: Command, ConfigInitializable {
     public let id = "create_session"
     public let help = ["This command creates opentok session for live video user"]
@@ -49,10 +52,49 @@ final class CreateSessionCommand: Command, ConfigInitializable {
     }
 }
 
+final class TestPayments: Command, ConfigInitializable {
+    public let id = "test_payments"
+    public let help = ["This command does things, like foo, and bar."]
+    public let console: ConsoleProtocol
+    private let fbId = fbIdLilia
+    
+    public init(console: ConsoleProtocol) {
+        self.console = console
+    }
+    
+    public convenience init(config: Config) throws {
+        let console = try config.resolveConsole()
+        self.init(console: console)
+    }
+    
+    
+    public func run(arguments: [String]) throws {
+        let price = "30"
+        let spot = 2
+        
+        drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", 
+                  senderId: fbId, 
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "There are \(spot.string) spots left to be on the show", 
+                  senderId: fbId, 
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        
+        let textForOneMoreThingNo = "You have an hour to claim your spot for $\(price)"
+        
+        let quickReplies = [Reply.getYes(), Reply.getNo()]
+        
+        drop.send(message: textForOneMoreThingNo,
+                  senderId: fbId,
+                  messagingType: .RESPONSE,
+                  quickReplies: quickReplies)
+    }
+}
+
 final class TestCustomCommand: Command, ConfigInitializable {
     public let id = "test_command"
     public let help = ["This command does things, like foo, and bar."]
     public let console: ConsoleProtocol
+    private let fbId = fbIdLilia
     
     public init(console: ConsoleProtocol) {
         self.console = console
@@ -64,19 +106,18 @@ final class TestCustomCommand: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        let dmitryId = "1577826605605503"
-        
-        drop.send(message: "Check out three lucky giveaway winners", senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+
+        drop.send(message: "Check out three lucky giveaway winners", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         let winnersImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
         guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
             analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
             return
         }
-        drop.send(attachmentId: attachmentId, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(attachmentId: attachmentId, senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
 
         let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
         drop.send(message: "Do you want to be notified about other giveaways?",
-                  senderId: dmitryId,
+                  senderId: fbId,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
                   quickReplies: [quickReply])
     }
