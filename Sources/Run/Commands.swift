@@ -102,6 +102,7 @@ final class TestCustomCommand: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
+
         drop.send(message: "Check out three lucky giveaway winners", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         let winnersImageUrl = "https://app.box.com/shared/static/acu08e8dpf3gg4x3tphzllwj6ngg9xji.png"
         guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
