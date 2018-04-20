@@ -9,4 +9,13 @@ class Reply {
         // i want to be on the next show
         return ["content_type": "text", "title": "count me in!", "payload": POSTBACK_BOT_COUNT_ME_IN]
     }
+    
+    public static func getYes() -> [String: Any] {
+        return ["content_type": "text", "title": "Yes", "payload": POSTBACK_YES_PAYMENT]
+    }
+    
+    public static func getNo() -> [String: Any] {
+        return ["content_type": "text", "title": "No", "payload": POSTBACK_NO_PAYMENT]
+    }
+    
 }

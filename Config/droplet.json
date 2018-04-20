@@ -45,6 +45,7 @@
         "whitelist_domains",
         "test_command",
         "create_session",
-        "count_subscribers"
+        "count_subscribers",
+        "test_payments"
     ]
 }

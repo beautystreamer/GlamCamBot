@@ -5,8 +5,8 @@
     "djangoToken": "Token fassasdffsfsdfdsf",
     "product_analytics_index": "staging_bot_product_analytics",
     "eng_analytics_index": "staging_bot_eng_analytics",
-    "bot_host_name": "https://host.com",
-    "stripeKey": "sk_test",
+    "bot_host_name": "https://botprod.glamcam.live",
+    "stripeKey": "sk_test_DSUJyKRVkVAsLjSGgq2FWqjB",
     "isActiveMode": true
 }
 
