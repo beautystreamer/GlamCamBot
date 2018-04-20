@@ -69,11 +69,9 @@ final class TestPayments: Command, ConfigInitializable {
     
     
     public func run(arguments: [String]) throws {
-        let host = "tailormadejane"
         let price = "30"
         let spot = 2
-        let product = "tailormadejane_session20"
-        
+      
         drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         drop.send(message: "There are " + spot.string + " spots left to be on the show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
@@ -85,33 +83,6 @@ final class TestPayments: Command, ConfigInitializable {
                   senderId: fbId,
                   messagingType: .RESPONSE,
                   quickReplies: quickReplies)
-//        if ExperimentManager.isSubscriber(subscriber?, inExperiment: .CoinsFeature) {
-//            return [Reply.getAskAQuestionQuickReply(), Reply.getTellMeMoreQuickReply()]
-//        } else {
-//            return [Reply.getTellMeMoreQuickReply()]
-//        }
-//        (message: "You have an hour to claim your spot for $" + price, senderId: fbId, messagingType: .RESPONSE, quickReplies: [
-//                ["content_type":"text", "title":"Yes", "payload":"<DEVELOPER_DEFINED_PAYLOAD>"],
-//                ["content_type":"text", "title":"No", "payload":"<DEVELOPER_DEFINED_PAYLOAD>"]])
-//        testQuickReply()
-//        //drop.handleQuickReply(payload: quickReplyPayload, subscriber: fbId)
-//        message: String, senderId: String, messagingType: MessagingType, quickReplies: [[String: Any]]? = nil) -> Response?
-//        let postbackPayload = eventMessage["postback"]?["payload"]?.string
-//
-//        if quickReplyPayload {
-//            handleQuickReply(payload: quickReplyPayload, subscriber: fbId)
-//        } else if postbackPayload {
-//            handlePostback(payload: postbackPayload, subscriber: fbId, user_ref: eventMessage["optin.ref"]?.string)
-//
-       // http://localhost:3000/?host=hannalee&user_id=123&price=345&product=1211211
-//        let url = "https://botprod.glamcam.live?host=" + host + "&user_id=" + fbId + "&price=" + price + "&product=" + product
-//        let seeNow = ["type": "web_url", "url": url, "title": "Yes"]
-//        let seeLater = ["type": "web_url", "url": "https://giveaways.glamcam.live/?host=tailormadejane", "title": "No"]
-//        let pollResults = drop.genericButtonsAttachment(message: "You have an hour to claim your spot for $" + price, buttons:[seeNow, seeLater])
-//
-//        drop.send(attachment: pollResults,
-//                  senderId: fbId,
-//                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
 }
 
