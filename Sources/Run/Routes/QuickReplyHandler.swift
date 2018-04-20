@@ -46,9 +46,12 @@ extension Droplet {
         let product = "tailormadejane_session20"
         //!!!! to be changed to real picture
         let imageUrl = "http://sokogakuen.org/birdtitle.gif"
-        let url = "https://botprod.glamcam.live?host=" + host + "&user_id=" + subscriber.fb_messenger_id + "&price=" + price + "&product=" + product
+        let url = "https://botprod.glamcam.live?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
         let buttonClaimSpot = ["type": "web_url", "url": url, "title": "Claim your spot now"]
-        let pollResults = drop.carouselElement(title: "Join Tailor made jane show", imageUrl: imageUrl, subtitle: "for only " + price + "$ you can be on the next show", button: buttonClaimSpot)
+        let pollResults = drop.carouselElement(title: "Join Tailor made jane show", 
+                                               imageUrl: imageUrl, 
+                                               subtitle: "for only \(price)$ you can be on the next show", 
+                                               button: buttonClaimSpot)
         
         drop.send(attachment: drop.genericAttachment(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
