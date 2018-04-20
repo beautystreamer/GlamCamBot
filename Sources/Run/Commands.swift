@@ -71,7 +71,7 @@ final class TestPayments: Command, ConfigInitializable {
     public func run(arguments: [String]) throws {
         let price = "30"
         let spot = 2
-      
+        
         drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         drop.send(message: "There are " + spot.string + " spots left to be on the show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
