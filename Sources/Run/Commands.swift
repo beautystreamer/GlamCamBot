@@ -72,10 +72,14 @@ final class TestPayments: Command, ConfigInitializable {
         let price = "30"
         let spot = 2
         
-        drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        drop.send(message: "There are " + spot.string + " spots left to be on the show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", 
+                  senderId: fbId, 
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "There are \(spot.string) spots left to be on the show", 
+                  senderId: fbId, 
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
-        let textForOneMoreThingNo = "You have an hour to claim your spot for $" + price
+        let textForOneMoreThingNo = "You have an hour to claim your spot for $\(price)"
         
         let quickReplies = [Reply.getYes(), Reply.getNo()]
         
