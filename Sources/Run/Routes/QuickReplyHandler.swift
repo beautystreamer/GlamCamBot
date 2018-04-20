@@ -44,8 +44,7 @@ extension Droplet {
         let host = "tailormadejane"
         let price = "30"
         let product = "tailormadejane_session20"
-        //!!!! to be changed to real picture
-        let imageUrl = "http://sokogakuen.org/birdtitle.gif"
+        let imageUrl = "https://giveawaysstaging.glamcam.live/img/Talior-made-jane-join-show.png"
         let url = "https://botprod.glamcam.live?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
         let buttonClaimSpot = ["type": "web_url", "url": url, "title": "Claim your spot now"]
         let pollResults = drop.carouselElement(title: "Join Tailor made jane show", 
