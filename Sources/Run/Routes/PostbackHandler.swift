@@ -70,9 +70,9 @@ extension Droplet {
             var buttonTitle = "Enter The Giveaway"
 
 
-            if ref == giveaway || ref == "joshalexmua_giveaway" {
+            if ref == giveaway {
                 // do nothing, default are good
-            } else if ref == "hannalee_giveaway" {
+            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" {
                 subtitle = "Win $50 Sephora gift card"
             } else {
                 let nameDict = [
