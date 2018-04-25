@@ -27,6 +27,7 @@ config.addConfigurable(command: UpdateBotMenuCommand.init, name:"update_bot_menu
 config.addConfigurable(command: TestCustomCommand.init, name: "test_command")
 config.addConfigurable(command: CreateSessionCommand.init, name: "create_session")
 config.addConfigurable(command: TestPayments.init, name: "test_payments")
+config.addConfigurable(command: TestShopping.init, name: "do_shopping")
 config.addConfigurable(command: CountSubscribersCommand.init, name: "count_subscribers")
 
 try config.addProvider(LeafProvider.Provider.self)
