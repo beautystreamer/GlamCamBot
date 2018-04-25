@@ -19,7 +19,7 @@ import LeafProvider
 ///
 /// .run() runs the Droplet's commands, 
 /// if no command is given, it will default to "serve"
-
+//    "stripeKey": "pk_test_NQ93FNErcyg9BCE7iutKH8fb", for production
 let config = try Config()
 try config.setup()
 config.addConfigurable(command: WhitelistDomainsCommand.init, name:"whitelist_domains")
@@ -33,9 +33,14 @@ try config.addProvider(LeafProvider.Provider.self)
 try config.addProvider(MySQLProvider.Provider.self)
 config.preparations.append(MediaUpload.self)
 config.preparations.append(Subscriber.self)
+config.preparations.append(StripeCustomer.self)
+config.preparations.append(StripeCharge.self)
 
 let drop = try Droplet(config)
 drop.view.shouldCache = true
 try drop.setup()
-
+//to test payments 
+//let test = TestPayments(console: drop.console)
+//try test.run(arguments: [])
 try drop.run()
+

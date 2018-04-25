@@ -67,7 +67,6 @@ final class TestPayments: Command, ConfigInitializable {
         self.init(console: console)
     }
     
-    
     public func run(arguments: [String]) throws {
         let price = "30"
         let spot = 2
@@ -78,7 +77,6 @@ final class TestPayments: Command, ConfigInitializable {
         let textForOneMoreThingNo = "You have an hour to claim your spot for $" + price
         
         let quickReplies = [Reply.getYes(), Reply.getNo()]
-        
         drop.send(message: textForOneMoreThingNo,
                   senderId: fbId,
                   messagingType: .RESPONSE,
