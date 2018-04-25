@@ -17,7 +17,7 @@ final public class StripeCustomer: Model {
             return Identifier(.string(self.stripe_customer_id), in: nil)
         }
         set {
-            self.stripe_customer_id = (newValue?.string)!
+            self.stripe_customer_id = newValue?.string ?? "n/a"
         }
     }
     

@@ -30,7 +30,7 @@ final public class StripeCharge: Model {
             return Identifier(.string(self.charge_id), in: nil)
         }
         set {
-            self.charge_id = (newValue?.string)!
+            self.charge_id = newValue?.string ?? "n/a"
         }
     }
     
