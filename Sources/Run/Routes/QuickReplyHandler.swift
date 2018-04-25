@@ -45,10 +45,16 @@ extension Droplet {
         let price = "30"
         let product = "tailormadejane_session20"
         let imageUrl = "https://giveawaysstaging.glamcam.live/img/Talior-made-jane-join-show.png"
-        //To Nick: what will be the url for the staging and production?
-        let url = "http://localhost:8080/web?host=" + host + "&user_id=" + subscriber.fb_messenger_id + "&price=" + price + "&product=" + product
+
+        //To Nick and Boris: what will be the url for the staging and production? I included the web page into the bot code and
+        //on a local machine I use "http://localhost:8080/web?host="
+        let url = "https://botprod.glamcam.live?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
+
         let buttonClaimSpot = ["type": "web_url", "url": url, "title": "Claim your spot now"]
-        let pollResults = drop.carouselElement(title: "Join Tailor made jane show", imageUrl: imageUrl, subtitle: "for only " + price + "$ you can be on the next show", button: buttonClaimSpot)
+        let pollResults = drop.carouselElement(title: "Join Tailor made jane show", 
+                                               imageUrl: imageUrl, 
+                                               subtitle: "for only \(price)$ you can be on the next show", 
+                                               button: buttonClaimSpot)
         
         drop.send(attachment: drop.genericAttachment(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
