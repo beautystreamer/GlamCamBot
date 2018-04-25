@@ -2,23 +2,23 @@ import Foundation
 import Vapor
 
 extension Droplet {
-    
+
     func handlePostback(payload: String, subscriber: Subscriber, user_ref: String?) {
         analytics?.logDebug("Payload = \(payload)")
         let postback = String(payload.split(separator: "|")[0])
-        
+
         if postback == POSTBACK_GET_STARTED {
             self.handleNewUserFlow(subscriber: subscriber, user_ref: user_ref)
         } else if postback == POSTBACK_BOT_COUNT_ME_IN {
             handleSubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_UNSUBSCRIBE_RESUBSCRIBE {
             handleUnsubscribeResubscribe(subscriber: subscriber)
-            
+
         } else {
             analytics?.logDebug(postback)
         }
     }
-    
+
     func handleUnsubscribeResubscribe(subscriber: Subscriber) {
         if SubscriberStatus.isSubscribeMessage(subscriber.status ?? "") {
             handleUnsubscribe(subscriber: subscriber)
@@ -26,7 +26,7 @@ extension Droplet {
             handleSubscribe(subscriber: subscriber)
         }
     }
-    
+
     func handleSubscribe(subscriber: Subscriber) {
         analytics?.logDebug("Entered - subscribe selected flow. Subscribe user.")
         subscriber.setStatus(.subscribed)
@@ -36,7 +36,7 @@ extension Droplet {
                   messagingType: .RESPONSE)
         analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
     }
-    
+
     func handleUnsubscribe(subscriber: Subscriber) {
         analytics?.logDebug("Entered - unsubscribe selected flow. Unsubscribe user.")
         subscriber.setStatus(.unsubscribed)
@@ -51,8 +51,8 @@ extension Droplet {
         analytics?.logDebug("Entered - new user flow")
         analytics?.logEvent(eventString: fb_messenger_id, withValue: user_ref ?? "")
 
-        let giveaway = "giveaway_giveaway"       
-        
+        let giveaway = "giveaway_giveaway"
+
         if let ref = user_ref {
             let refDict = [
                 "HannaLee": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf1y0s2l05ff0146mo69rlpd",
@@ -61,18 +61,18 @@ extension Droplet {
                 "victoriajameson": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20wkrk05gx01462mbge7hy",
                 "princessbellaaa": "https://files.graph.cool/cjf1vq5cz26lh010048bqfrow/cjf20xzfa05h101464w2b7m1k",
                 giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg",
-                "joshalexmua_giveaway": "https://app.box.com/shared/static/etml9quglqn4alk789p9u9gw7cfkt3vh.png",
+                "joshalexmua_giveaway": "https://files.graph.cool/cjd9n1xrl1er90167eyl9ib07/cjgcrlz4o043201554ajxa02x",
                 "hannalee_giveaway": "https://app.box.com/shared/static/7rg06a35ezf6fpn2lewqkvpee4n72a77.png",
                 ]
-            
+
             var title = "GLAMCAM GIVEAWAY!"
             var subtitle = "lots of amazing products"
             var buttonTitle = "Enter The Giveaway"
 
 
-            if ref == giveaway || ref == "joshalexmua_giveaway" {
+            if ref == giveaway {
                 // do nothing, default are good
-            } else if ref == "hannalee_giveaway" {
+            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" {
                 subtitle = "Win $50 Sephora gift card"
             } else {
                 let nameDict = [
@@ -102,10 +102,10 @@ extension Droplet {
             let message = "Hey, thanks for signing up to be on the next show"
             self.send(message: message, senderId: fb_messenger_id, messagingType: .RESPONSE)
         }
-        
+
     }
 
-    
+
     public func handleNewUserFlow(subscriber: Subscriber, user_ref: String?) {
         handleNewUserFlow(fb_messenger_id: subscriber.fb_messenger_id, user_ref: user_ref)
 //        analytics?.logDebug("Entered - new user flow")
