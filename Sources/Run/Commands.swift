@@ -73,7 +73,7 @@ final class TestPayments: Command, ConfigInitializable {
         }
         
         let fbId = arguments[0]
-        let price = "30"
+        let price = "1"
         let spot = 2
         
         drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", 
