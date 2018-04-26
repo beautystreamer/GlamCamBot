@@ -36,6 +36,9 @@ final public class Subscriber: Model {
     public var replied_to_greeting: Bool = false
     public var notify_about_giveaways = false
     
+    public var stripe_customer_id: String?
+    public var remember_card_on_file: Bool = false
+    
     public var id: Identifier? {
         get {
             return Identifier(.string(self.fb_messenger_id), in: nil)
@@ -332,3 +335,15 @@ public extension Subscriber {
         }
     }
 }
+
+extension Subscriber: CustomDebugStringConvertible {
+    
+    public var description: String {
+        return "\(self.fb_messenger_id) \(self.first_name) \(self.last_name) tz=\(self.timezone)"
+    }
+    
+    public var debugDescription: String {
+        return  description
+    }
+}
+

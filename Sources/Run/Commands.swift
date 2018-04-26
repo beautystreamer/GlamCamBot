@@ -56,7 +56,6 @@ final class TestPayments: Command, ConfigInitializable {
     public let id = "test_payments"
     public let help = ["This command does things, like foo, and bar."]
     public let console: ConsoleProtocol
-    private let fbId = fbIdLilia
     
     public init(console: ConsoleProtocol) {
         self.console = console
@@ -67,9 +66,14 @@ final class TestPayments: Command, ConfigInitializable {
         self.init(console: console)
     }
     
-    
     public func run(arguments: [String]) throws {
-        let price = "30"
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
+        
+        let fbId = arguments[0]
+        let price = "1"
         let spot = 2
         
         drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", 
@@ -82,7 +86,38 @@ final class TestPayments: Command, ConfigInitializable {
         let textForOneMoreThingNo = "You have an hour to claim your spot for $\(price)"
         
         let quickReplies = [Reply.getYes(), Reply.getNo()]
+        drop.send(message: textForOneMoreThingNo,
+                  senderId: fbId,
+                  messagingType: .RESPONSE,
+                  quickReplies: quickReplies)
+    }
+}
+
+final class TestShopping: Command, ConfigInitializable {
+    public let id = "do_shopping"
+    public let help = ["This command does shopping experience"]
+    public let console: ConsoleProtocol
+    private let fbId = fbIdLilia
+    
+    public init(console: ConsoleProtocol) {
+        self.console = console
+    }
+    
+    public convenience init(config: Config) throws {
+        let console = try config.resolveConsole()
+        self.init(console: console)
+    }
+    
+    public func run(arguments: [String]) throws {
+        let price = "1"
+        let spot = 2
         
+        drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "There are " + spot.string + " spots left to be on the show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        
+        let textForOneMoreThingNo = "You have an hour to claim your spot for $" + price
+        
+        let quickReplies = [Reply.getYes(), Reply.getNo()]
         drop.send(message: textForOneMoreThingNo,
                   senderId: fbId,
                   messagingType: .RESPONSE,

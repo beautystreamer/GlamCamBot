@@ -46,6 +46,7 @@
         "test_command",
         "create_session",
         "count_subscribers",
-        "test_payments"
+        "test_payments",
+        "do_shopping"
     ]
 }

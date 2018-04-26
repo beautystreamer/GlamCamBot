@@ -19,7 +19,7 @@ import LeafProvider
 ///
 /// .run() runs the Droplet's commands, 
 /// if no command is given, it will default to "serve"
-
+//    "stripeKey": "pk_test_NQ93FNErcyg9BCE7iutKH8fb", for production
 let config = try Config()
 try config.setup()
 config.addConfigurable(command: WhitelistDomainsCommand.init, name:"whitelist_domains")
@@ -27,15 +27,18 @@ config.addConfigurable(command: UpdateBotMenuCommand.init, name:"update_bot_menu
 config.addConfigurable(command: TestCustomCommand.init, name: "test_command")
 config.addConfigurable(command: CreateSessionCommand.init, name: "create_session")
 config.addConfigurable(command: TestPayments.init, name: "test_payments")
+config.addConfigurable(command: TestShopping.init, name: "do_shopping")
 config.addConfigurable(command: CountSubscribersCommand.init, name: "count_subscribers")
 
 try config.addProvider(LeafProvider.Provider.self)
 try config.addProvider(MySQLProvider.Provider.self)
 config.preparations.append(MediaUpload.self)
 config.preparations.append(Subscriber.self)
+config.preparations.append(StripeCustomer.self)
+config.preparations.append(StripeCharge.self)
 
 let drop = try Droplet(config)
 drop.view.shouldCache = true
 try drop.setup()
-
 try drop.run()
+

@@ -7,7 +7,6 @@ import Dispatch
 import SMTP
 
 
-
 extension Droplet {
     
     public func updateMessengerProfileWith(payload: [String: Any]) {
@@ -35,6 +34,10 @@ extension Droplet {
     
         get("test") { req in
             return Response(status: Status(statusCode: 200))
+        }
+        
+        get("web") { req in
+            return try self.view.make("index.html")
         }
         
         get("webhook") { req in
@@ -78,13 +81,59 @@ extension Droplet {
                         
                         welf.handleEventMessage(eventMessage, senderId: senderId)
                     }
-                    
+                
                 } else {
                     analytics?.logError("Uknown entry=\(entry)")
                 }
             }
             
             return Response(status: Status(statusCode: 200))
+        }
+        
+        post("api/submit_payment") { req in
+            analytics?.logDebug("payment request = \(req)")
+            
+            guard let token = req.data["token"]?.string else {
+                throw Abort.badRequest
+            }
+            
+            guard let product = req.data["product"]?.string else {
+                throw Abort.badRequest
+            }
+            
+            guard let price = req.data["price"]?.string else {
+                analytics?.logDebug("Failed to find price in request")
+                throw Abort.badRequest
+            }
+            
+            guard let host = req.data["host"]?.string else {
+                throw Abort.badRequest
+            }
+            
+            guard let senderId = req.data["user_id"]?.string else {
+                analytics?.logError("Failed to find user_id in \(req.data)")
+                throw Abort.badRequest
+                
+            }
+            
+            guard let subscriber = try self.getUserProfile(senderId: senderId) else {
+                analytics?.logError("Failed to find \(senderId) for purchase flow")
+                throw Abort.notFound
+            }
+            
+            let email = req.data["email"]?.string
+            var remember = false
+            if let unwrappedBool = req.data["remember"]?.bool {
+                remember = unwrappedBool
+            }
+            
+            return try self.handleMessengerPurchase(subscriber: subscriber,
+                                                    token: token,
+                                                    product: product,
+                                                    host: host,
+                                                    price: price,
+                                                    email: email,
+                                                    remember: remember)
         }
     }
     
