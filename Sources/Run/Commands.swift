@@ -120,7 +120,7 @@ final class TestShopping: Command, ConfigInitializable {
         let buttonNo = ["type": "postback", "title": "No", "payload": QUICK_REPLY_NO_PAYMENT]
         let url = "https://public.boxcloud.com/api/2.0/internal_files/289851979712/versions/305057757200/representations/png_paged_2048x2048/content/1.png?access_token=1!V5qGswUjUREIXbtHQXXs0MNHCgQxQfOqc2Nui48pqEelrcLLi8p5FwzuiRDfwYlRhOT2N5BmV-3YOdY453f4pB9_1I_h7__o1TNDHLDszJEgBwYeB0mdxDeD8OEmyyKDJHO9PL2cnRrLUGbV3ReVyFE5FyWs5cg1TmNj0GSdHCFRiP2wEAemi5NKvr3WmjZff3tWCkcrWg3uOzLG5it75nk-t_uSqtn3ve9vjaakwEfB7BJAFKhYNQMgbjtV0tYKSLuNkg5-1OFQoYWh1GLt-DO63u_j-1dc--GpxaESBSExN8ZUILu6rX9SPjRtWJQZcyxIsGtKPDOpDn0I5QN3OfDAXsZjpyhdhlYX0XB14pUmNinKL5bOhcrZvRlOJ29s86njqU6MX1b91P5Kty8.&box_client_name=box-content-preview&box_client_version=1.40.0"
         let elements = drop.carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttons: [buttonYes, buttonNo])
-        drop.send(attachment: drop.genericAttachment(elements: [elements]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
                   senderId: fbId,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         guard let subscriber = drop.getSubOrUserProfileFor(senderId: fbId) else {
