@@ -106,7 +106,7 @@ extension Droplet {
             return Response(status: result.status, body: message.makeBody())
         }
         
-        throw Abort.serverError
+        return result
     }
     
 }
