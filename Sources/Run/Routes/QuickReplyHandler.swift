@@ -16,7 +16,7 @@ extension Droplet {
             handlePaymentToWeb(subscriber: subscriber)
         } else if quickReply == QUICK_REPLY_NO_PAYMENT{
             handleNoPayment(subscriber: subscriber)
-        }
+        } 
         else {
             analytics?.logError("Unknown quick reply \(quickReply)")
         }
@@ -56,7 +56,7 @@ extension Droplet {
                                                subtitle: "for only \(price)$ you can be on the next show", 
                                                button: buttonClaimSpot)
         
-        drop.send(attachment: drop.genericAttachment(elements: [pollResults]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }

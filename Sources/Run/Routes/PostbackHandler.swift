@@ -13,7 +13,8 @@ extension Droplet {
             handleSubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_UNSUBSCRIBE_RESUBSCRIBE {
             handleUnsubscribeResubscribe(subscriber: subscriber)
-
+        } else if postback == POSTBACK_SHOW_ME_PRODUCTS {
+            handleShowProducts(subscriber: subscriber)
         } else {
             analytics?.logDebug(postback)
         }
@@ -126,5 +127,9 @@ extension Droplet {
 //
 //        let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
 //        self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+    }
+    
+    public func handleShowProducts(subscriber: Subscriber){
+        self.send(message: "message", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
     }
 }
