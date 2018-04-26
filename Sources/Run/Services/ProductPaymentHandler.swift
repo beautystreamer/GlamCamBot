@@ -107,7 +107,7 @@ extension Droplet {
         }
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {[weak self] in
-            self.send(send(message: "Thank you for the payment", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION))
+            self?.send(message: "Thank you for the payment", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         }
         return result
     }
