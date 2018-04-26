@@ -77,7 +77,7 @@ extension Droplet {
         subscriber.stripe_customer_id = nil
         subscriber.remember_card_on_file = false
         subscriber.forceSave()
-        drop.send(message: "Processing your card has failed.",
+        self.send(message: "Processing your card has failed.",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     
@@ -105,10 +105,12 @@ extension Droplet {
             analytics?.logResponse(result, endpoint: "stripe", dict: errorDict)
             return Response(status: result.status, body: message.makeBody())
         }
+
+        self.send(message: "The payment is successfully processed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {[weak self] in
+//            self?.send(message: "The payment is successfully processed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+//        }
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {[weak self] in
-            self?.send(message: "Thank you for the payment", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        }
         return result
     }
     
