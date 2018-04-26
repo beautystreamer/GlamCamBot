@@ -81,7 +81,7 @@ extension Droplet {
                         
                         welf.handleEventMessage(eventMessage, senderId: senderId)
                     }
-                    
+                
                 } else {
                     analytics?.logError("Uknown entry=\(entry)")
                 }
