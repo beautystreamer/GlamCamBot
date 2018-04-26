@@ -63,6 +63,7 @@ extension Droplet {
                 giveaway: "https://app.box.com/shared/static/mwzeihp4qcsx4c7l0j5rg3uubnkbbqpk.jpg",
                 "joshalexmua_giveaway": "https://files.graph.cool/cjd9n1xrl1er90167eyl9ib07/cjgcrlz4o043201554ajxa02x",
                 "hannalee_giveaway": "https://app.box.com/shared/static/7rg06a35ezf6fpn2lewqkvpee4n72a77.png",
+                "tailormadejane_giveaway": "https://files.graph.cool/cjd9n1xrl1er90167eyl9ib07/cjgcrlz4o043201554ajxa02x",
                 ]
 
             var title = "GLAMCAM GIVEAWAY!"
@@ -72,7 +73,7 @@ extension Droplet {
 
             if ref == giveaway {
                 // do nothing, default are good
-            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" {
+            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" || ref == "tailormadejane_giveway" {
                 subtitle = "Win $50 Sephora gift card"
             } else {
                 let nameDict = [
