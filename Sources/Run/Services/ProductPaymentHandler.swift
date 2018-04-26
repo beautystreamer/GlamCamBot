@@ -74,13 +74,13 @@ extension Droplet {
     
     func handleStripeClientChargeFailure(subscriber: Subscriber, stripe_customer_id: String) {
         analytics?.logError("Failed to charge \(subscriber), stripe_client_id=\(stripe_customer_id)")
-        
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            subscriber.stripe_customer_id = nil
-            subscriber.remember_card_on_file = false
-            subscriber.forceSave()
-            drop.send(message: "Processing your card has failed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        }
+        subscriber.stripe_customer_id = nil
+        subscriber.remember_card_on_file = false
+        subscriber.forceSave()
+        drop.send(message: "Processing your card has failed.",
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+    
     }
     
     func handleMessengerPurchase(subscriber: Subscriber,
