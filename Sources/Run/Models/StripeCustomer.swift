@@ -57,9 +57,9 @@ final public class StripeCustomer: Model {
 extension StripeCustomer: Preparation {
     public static func prepare(_ database: Database) throws {
         try database.create(self) { table in
-            table.string("stripe_customer_id", length: nil, optional: false, unique: true, default: nil)
-            table.string("default_paymet_info", optional: false, unique: false, default: false)
-            table.string("user_id", length: nil, optional: false, unique: false, default: nil)
+            table.string("stripe_customer_id", unique: true)
+            table.string("default_payment_info")
+            table.string("user_id")
         }
     }
     

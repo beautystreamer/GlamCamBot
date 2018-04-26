@@ -40,8 +40,5 @@ config.preparations.append(StripeCharge.self)
 let drop = try Droplet(config)
 drop.view.shouldCache = true
 try drop.setup()
-//to test payments 
-//let test = TestPayments(console: drop.console)
-//try test.run(arguments: [])
 try drop.run()
 

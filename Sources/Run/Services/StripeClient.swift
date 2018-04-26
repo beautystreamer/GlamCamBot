@@ -16,7 +16,7 @@ public class StripeClient {
         
         return token!
     }
-
+    
     public init(config: Vapor.Config, responder: Responder) {
         stripeKey = StripeClient.getStripeKey(config)
         client = responder

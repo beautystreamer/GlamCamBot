@@ -39,7 +39,7 @@ extension Droplet {
         analytics?.logDebug("Entered handleExistingClientPurchaseFlow")
         guard let stripe_customer_id = subscriber.stripe_customer_id else {
             analytics?.logError("Can't process purchase for existing client with missing stripe_customer_id")
-            self.send(message: "Something went wrong. Please request your horoscope again.",
+            self.send(message: "Something went wrong.",
                       senderId: subscriber.fb_messenger_id,
                       messagingType: .RESPONSE)
             return
@@ -78,6 +78,8 @@ extension Droplet {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             subscriber.stripe_customer_id = nil
             subscriber.remember_card_on_file = false
+            subscriber.forceSave()
+            drop.send(message: "Processing your card has failed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         }
     }
     
@@ -88,18 +90,20 @@ extension Droplet {
                                  price: String,
                                  email: String?,
                                  remember: Bool) throws -> Response {
-        if let result = stripeClient?.processChargeFor(subscriber: subscriber,
-                                                       token: token,
-                                                       description: "charge for \(product)",
-                                                       amount: Int(price.int! * 100),
-                                                       reusePaymentInfo: remember) {
-            if result.status != .ok {
-                let message = result.json?["error.message"]?.string  ?? "Unknown error, please try later"
-                var errorDict = subscriber.toDictionary()
-                errorDict["message"] = message
-                analytics?.logResponse(result, endpoint: "stripe", dict: errorDict)
-                return Response(status: result.status, body: message.makeBody())
-            }
+        guard let result = stripeClient?.processChargeFor(subscriber: subscriber,
+                                                          token: token,
+                                                          description: "charge for \(product)",
+                                                          amount: Int(price.int! * 100),
+                                                          reusePaymentInfo: remember) else {
+            return Response(status: .noContent, body: "")
+        }
+        
+        guard result.status == .ok else {
+            let message = result.json?["error.message"]?.string  ?? "Unknown error, please try later"
+            var errorDict = subscriber.toDictionary()
+            errorDict["message"] = message
+            analytics?.logResponse(result, endpoint: "stripe", dict: errorDict)
+            return Response(status: result.status, body: message.makeBody())
         }
         
         throw Abort.serverError

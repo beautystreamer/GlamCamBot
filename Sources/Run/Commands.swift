@@ -56,7 +56,6 @@ final class TestPayments: Command, ConfigInitializable {
     public let id = "test_payments"
     public let help = ["This command does things, like foo, and bar."]
     public let console: ConsoleProtocol
-    private let fbId = fbIdLilia
     
     public init(console: ConsoleProtocol) {
         self.console = console
@@ -68,6 +67,12 @@ final class TestPayments: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
+        
+        let fbId = arguments[0]
         let price = "30"
         let spot = 2
         
