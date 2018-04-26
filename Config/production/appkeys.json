@@ -6,6 +6,6 @@
     "product_analytics_index": "product_analytics",
     "eng_analytics_index": "eng_analytics",
     "bot_host_name": "https://botprod.glamcam.live",
-    "stripeKey": "pk_test_NQ93FNErcyg9BCE7iutKH8fb",
+    "stripeKey": "sk_live_4HjYenEXJT5kZy4XuMw5usDk",
     "isActiveMode": true
 }
