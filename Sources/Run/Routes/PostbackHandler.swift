@@ -73,7 +73,7 @@ extension Droplet {
 
             if ref == giveaway {
                 // do nothing, default are good
-            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" || ref == "tailormadejane_giveway" {
+            } else if ref == "hannalee_giveaway" || ref == "joshalexmua_giveaway" || ref == "tailormadejane_giveaway" {
                 subtitle = "Win $50 Sephora gift card"
             } else {
                 let nameDict = [
