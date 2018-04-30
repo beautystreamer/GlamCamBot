@@ -109,8 +109,14 @@ final class TestShopping: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
+        
+        let fbId = arguments[0]
+        
         drop.send(message: "Thanks for watching! This is Hanna's final look from today's show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-
         let title = "I'm sure you'd love to know all the products Hanna used today"
         let subtitle = ""
         let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
