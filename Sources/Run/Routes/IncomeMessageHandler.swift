@@ -24,6 +24,9 @@ extension Droplet {
                     return
                 }
             }
+//            self.send(message: "I'm not sure what you mean, try saying \"Go\"",
+//                      senderId: subscriber.fb_messenger_id,
+//                      messagingType: .RESPONSE)
             
         } else {
             analytics?.logDebug("Entered - incoming message is nil. Ignore this message.")
