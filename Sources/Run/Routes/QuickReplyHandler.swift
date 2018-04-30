@@ -16,7 +16,7 @@ extension Droplet {
             handlePaymentToWeb(subscriber: subscriber)
         } else if quickReply == QUICK_REPLY_NO_PAYMENT{
             handleNoPayment(subscriber: subscriber)
-        }
+        } 
         else {
             analytics?.logError("Unknown quick reply \(quickReply)")
         }
@@ -44,7 +44,7 @@ extension Droplet {
         let host = "tailormadejane"
         let price = "30"
         let product = "tailormadejane_session20"
-        let imageUrl = "https://public.boxcloud.com/api/2.0/internal_files/289851363753/versions/305057066073/representations/png_paged_2048x2048/content/1.png?access_token=1!3EWE1-hiJcsOAthouYmWx4-nhLrCot2jxi322DnITk0235ucOhieX_jN1W1WgDuWpq18aMptMPfP6JTXk_UViUpHMlrOEXz3jmFk23JdnaIARqpjK6jHdDuTndHOwb_GguT3wottK2C5etm4DCkBDUB8jSDutAwKUaZz47iSQaGFHCB7b7c_TFKzqAhz9Jmmwh0IgpAE7oK9Qh2b7Al9gWE06gKZ9pmW0Dze2Rpv2jXP0tmZD4ej7zXo638-MG6OzMfYRc5J9lkQG2wWN10rGnnLGxnVYZ9BS0GSDT13c41bo0tmDqUc7TLHYUneLbj73dk8-lUvsOyWqKb-7nTOISYliR39zrkoeW9pjrUoYR-Y_17ha8SoFI6cvU4aMK765cSYD63KP3hOYHfif6E.&box_client_name=box-content-preview&box_client_version=1.40.0"
+        let imageUrl = "https://app.box.com/shared/static/jpidemmk2g401ez3855di9fluz2i2tbv.png"
 
         let botHostName = getBotHostName(config)
         
@@ -56,7 +56,7 @@ extension Droplet {
                                                subtitle: "for only \(price)$ you can be on the next show", 
                                                button: buttonClaimSpot)
         
-        drop.send(attachment: drop.genericAttachment(elements: [pollResults]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }

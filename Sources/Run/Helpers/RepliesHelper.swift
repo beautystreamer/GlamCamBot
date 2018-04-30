@@ -18,4 +18,8 @@ class Reply {
         return ["content_type": "text", "title": "No", "payload": QUICK_REPLY_NO_PAYMENT]
     }
     
+    public static func showProducts() -> [String: Any] {
+        return ["content_type": "text", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
+    }
+    
 }

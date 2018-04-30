@@ -54,7 +54,7 @@ final class CreateSessionCommand: Command, ConfigInitializable {
 
 final class TestPayments: Command, ConfigInitializable {
     public let id = "test_payments"
-    public let help = ["This command does things, like foo, and bar."]
+    public let help = ["This command does payments for the shows."]
     public let console: ConsoleProtocol
     
     public init(console: ConsoleProtocol) {
@@ -109,19 +109,23 @@ final class TestShopping: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        let price = "1"
-        let spot = 2
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
         
-        drop.send(message: "Tailor-made-jane has chosen you to be on the next show!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        drop.send(message: "There are " + spot.string + " spots left to be on the show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        let fbId = arguments[0]
         
-        let textForOneMoreThingNo = "You have an hour to claim your spot for $" + price
-        
-        let quickReplies = [Reply.getYes(), Reply.getNo()]
-        drop.send(message: textForOneMoreThingNo,
+        drop.send(message: "Thanks for watching! This is Hanna's final look from today's show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        let title = "I'm sure you'd love to know all the products Hanna used today"
+        let subtitle = ""
+        let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
+        let buttonNo = ["type": "postback", "title": "No", "payload": QUICK_REPLY_NO_PAYMENT]
+        let url = "https://app.box.com/shared/static/rlk1ig77xlmfon8psaohat2m0ryji471.png"
+        let elements = drop.carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttons: [buttonYes, buttonNo])
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
                   senderId: fbId,
-                  messagingType: .RESPONSE,
-                  quickReplies: quickReplies)
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
 }
 

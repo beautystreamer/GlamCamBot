@@ -60,6 +60,14 @@ public extension Droplet {
         return elements
     }
     
+    func carouselElement(title: String, imageUrl: String, subtitle: String, buttons: [[String: Any]]) -> [String: Any] {
+        let elements: [String : Any] = ["title": title,
+                                        "subtitle": subtitle,
+                                        "image_url": imageUrl,
+                                        "buttons": buttons]
+        return elements
+    }
+    
     func broadcastCreativeMessageJSON(title: String, imageUrl: String, subtitle: String, linkUrl: String, linkTitle: String) -> [String: Any] {
         let button = ["type": "web_url", "url": linkUrl, "title": linkTitle]
         let elements: [String : Any] = ["title": title,
@@ -116,6 +124,15 @@ public extension Droplet {
     }
     
     func genericAttachment(elements: [[String: Any]]) -> [String: Any] {
+        return ["type": "template",
+                "payload":
+                    ["template_type": "generic",
+                     "elements": elements
+            ]
+        ]
+    }
+    
+    func genericAttachmentImageRatioSquare(elements: [[String: Any]]) -> [String: Any] {
         return ["type": "template",
                 "payload":
                     ["template_type": "generic",

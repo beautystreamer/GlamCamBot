@@ -13,7 +13,8 @@ extension Droplet {
             handleSubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_UNSUBSCRIBE_RESUBSCRIBE {
             handleUnsubscribeResubscribe(subscriber: subscriber)
-
+        } else if postback == POSTBACK_SHOW_ME_PRODUCTS {
+            handleShowProducts(subscriber: subscriber)
         } else {
             analytics?.logDebug(postback)
         }
@@ -126,5 +127,18 @@ extension Droplet {
 //
 //        let message = "Hey \(subscriber.first_name), thanks for signing up to be on the next show"
 //        self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+    }
+    
+    public func handleShowProducts(subscriber: Subscriber){
+        let url = "https://amzn.to/2HioF1k"
+        let price = 1.49
+        let title = "E.l.f. Moisturizing Lipstick\nRavishing Rose, 0.11 Ounce"
+        let subtitle = "$\(price)"
+        let buttonBuyNow = ["type": "web_url", "title": "BUY NOW", "url": url]
+        let imgUrl = "https://images-na.ssl-images-amazon.com/images/I/31VobMBuK9L.jpg"
+        let elements = drop.carouselElement(title: title, imageUrl: imgUrl, subtitle: subtitle, buttons: [buttonBuyNow])
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
 }
