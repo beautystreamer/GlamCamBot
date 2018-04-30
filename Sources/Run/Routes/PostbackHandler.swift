@@ -130,6 +130,15 @@ extension Droplet {
     }
     
     public func handleShowProducts(subscriber: Subscriber){
-        self.send(message: "message", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+        let url = "https://amzn.to/2HioF1k"
+        let price = 1.49
+        let title = "E.l.f. Moisturizing Lipstick\nRavishing Rose, 0.11 Ounce"
+        let subtitle = "$\(price)"
+        let buttonBuyNow = ["type": "web_url", "title": "BUY NOW", "url": url]
+        let imgUrl = "https://images-na.ssl-images-amazon.com/images/I/31VobMBuK9L.jpg"
+        let elements = drop.carouselElement(title: title, imageUrl: imgUrl, subtitle: subtitle, buttons: [buttonBuyNow])
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
 }
