@@ -15,7 +15,7 @@ extension Droplet {
                     analytics?.logError("Failed to proccess the payment: \(error)")
                     return
                 }
-            } else if lowercasedMessage == "test shopping flow" {
+            } else if lowercasedMessage == "test shopping" {
                 let test = TestShopping(console: drop.console)
                 do {
                     try test.run(arguments: [subscriber.fb_messenger_id])
