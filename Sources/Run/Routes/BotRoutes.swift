@@ -19,7 +19,7 @@ extension Droplet {
     
     public func whiteListDomains() {
         analytics?.logDebug("Whitelisting domains")
-        let dict = ["whitelisted_domains": ["show.glamcam.live", "giveaways.glamcam.live", "instagram.com", "www.instagram.com"]]
+        let dict = ["whitelisted_domains": ["show.glamcam.live", "giveaways.glamcam.live", "instagram.com", "www.instagram.com", "botstaging.glamcam.live", "botprod.glamcam.live"]]
         updateMessengerProfileWith(payload: dict)
     }
     
