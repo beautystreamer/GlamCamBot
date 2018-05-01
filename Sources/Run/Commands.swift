@@ -83,10 +83,10 @@ final class TestPayments: Command, ConfigInitializable {
                   senderId: fbId, 
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
-        let textForOneMoreThingNo = "You have an hour to claim your spot for $\(price)"
+        let textClaimYourSpot = "You have an hour to claim your spot for $\(price)"
         
         let quickReplies = [Reply.getYes(), Reply.getNo()]
-        drop.send(message: textForOneMoreThingNo,
+        drop.send(message: textClaimYourSpot,
                   senderId: fbId,
                   messagingType: .RESPONSE,
                   quickReplies: quickReplies)

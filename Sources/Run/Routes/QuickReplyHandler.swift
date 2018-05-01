@@ -50,7 +50,7 @@ extension Droplet {
         
         let url = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
 
-        let buttonClaimSpot = ["type": "web_url", "url": url, "title": "Claim your spot now"]
+        let buttonClaimSpot = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Claim your spot now"]
         let pollResults = drop.carouselElement(title: "Join Tailor made jane show", 
                                                imageUrl: imageUrl, 
                                                subtitle: "for only \(price)$ you can be on the next show", 

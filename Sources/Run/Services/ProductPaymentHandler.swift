@@ -107,9 +107,6 @@ extension Droplet {
         }
 
         self.send(message: "The payment is successfully processed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-//        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {[weak self] in
-//            self?.send(message: "The payment is successfully processed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-//        }
         
         return result
     }
