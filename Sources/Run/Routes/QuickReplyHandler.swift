@@ -42,7 +42,7 @@ extension Droplet {
     
     func handlePaymentToWeb(subscriber: Subscriber){
         let host = "tailormadejane"
-        let price = "30"
+        let price = "1"
         let product = "tailormadejane_session20"
         let imageUrl = "https://app.box.com/shared/static/jpidemmk2g401ez3855di9fluz2i2tbv.png"
 
@@ -55,13 +55,14 @@ extension Droplet {
                                                imageUrl: imageUrl, 
                                                subtitle: "for only \(price)$ you can be on the next show", 
                                                button: buttonClaimSpot)
-        
+        analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
         
     func handleNoPayment(subscriber: Subscriber){
+        analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
         drop.send(message: "No worries",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
