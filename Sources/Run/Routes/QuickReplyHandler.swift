@@ -41,17 +41,17 @@ extension Droplet {
     }
     
     func handlePaymentToWeb(subscriber: Subscriber){
-        let host = "tailormadejane"
-        let price = "1"
-        let product = "tailormadejane_session20"
-        let imageUrl = "https://app.box.com/shared/static/jpidemmk2g401ez3855di9fluz2i2tbv.png"
+        let host = "hannalee"
+        let price = "50"
+        let product = "hannalee_session20"
+        let imageUrl = "https://app.box.com/shared/static/1diiwqna8vsnkvb9yi2ottn981qhdo94.png"
 
         let botHostName = getBotHostName(config)
         
         let url = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
 
         let buttonClaimSpot = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Claim your spot now"]
-        let pollResults = drop.carouselElement(title: "Join Tailor made jane show", 
+        let pollResults = drop.carouselElement(title: "Join Hanna Lee show", 
                                                imageUrl: imageUrl, 
                                                subtitle: "for only \(price)$ you can be on the next show", 
                                                button: buttonClaimSpot)
