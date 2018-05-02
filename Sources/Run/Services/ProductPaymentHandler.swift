@@ -106,7 +106,7 @@ extension Droplet {
             return Response(status: result.status, body: message.makeBody())
         }
 
-        self.send(message: "The payment is successfully processed.", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        self.send(message: "EAH!!! You’re on the next show! We will reach out with a few potential times", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
         return result
     }

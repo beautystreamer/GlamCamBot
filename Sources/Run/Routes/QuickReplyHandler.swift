@@ -55,14 +55,14 @@ extension Droplet {
                                                imageUrl: imageUrl, 
                                                subtitle: "for only \(price)$ you can be on the next show", 
                                                button: buttonClaimSpot)
-        analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
+        analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
         
     func handleNoPayment(subscriber: Subscriber){
-        analytics?.logAnalytics(event: .SubscribeRequested, for: subscriber)
+        analytics?.logAnalytics(event: .RefusedToPurchaseTheShow, for: subscriber)
         drop.send(message: "No worries",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
