@@ -90,6 +90,24 @@ extension Droplet {
             return Response(status: Status(statusCode: 200))
         }
         
+        post("api/analyticsevent") {req in
+            guard let userId = req.data["user_id"]?.string, let subscriber = try Subscriber.find(userId) else {
+                return "can't find user with provided user_id"
+            }
+            
+            guard let event = req.data["event"]?.string else {
+                return "can't find event field"
+            }
+            
+            if let intValue = req.data["int_value"]?.int {
+                analytics?.logEvent(eventString: event, for: subscriber, withIntValue: intValue)
+            } else {
+                analytics?.logAnalytics(eventString: event, for: subscriber)
+            }
+            
+            return "success"
+        }
+        
         post("api/submit_payment") { req in
             analytics?.logDebug("payment request = \(req)")
             

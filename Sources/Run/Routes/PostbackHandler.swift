@@ -15,6 +15,10 @@ extension Droplet {
             handleUnsubscribeResubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_SHOW_ME_PRODUCTS {
             handleShowProducts(subscriber: subscriber)
+        } else if postback == POSTBACK_YES_PAYMENT{
+            handlePaymentToWeb(subscriber: subscriber)
+        } else if postback == POSTBACK_NO_PAYMENT{
+            handleNoPayment(subscriber: subscriber)
         } else {
             analytics?.logDebug(postback)
         }
@@ -141,5 +145,43 @@ extension Droplet {
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+    }
+    
+    func handlePaymentToWeb(subscriber: Subscriber){
+        let host = "hannalee"
+        let price = "50"
+        let product = "hannalee_session20"
+        let imageUrl = "https://app.box.com/shared/static/1diiwqna8vsnkvb9yi2ottn981qhdo94.png"
+        
+        let botHostName = getBotHostName(config)
+        
+        let url = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
+        
+        let buttonClaimSpot = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Claim your spot now"]
+        let pollResults = drop.carouselElement(title: "Join Hanna Lee show",
+                                               imageUrl: imageUrl,
+                                               subtitle: "for only \(price)$ you can be on the next show",
+            button: buttonClaimSpot)
+        analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+    }
+    
+    func handleNoPayment(subscriber: Subscriber){
+        analytics?.logAnalytics(event: .RefusedToPurchaseTheShow, for: subscriber)
+        drop.send(message: "No worries",
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+    }
+    
+    func getBotHostName(_ config: Config) -> String {
+        let key = "bot_host_name"
+        let token = config["appkeys", key]?.string
+        if token == nil {
+            analytics?.logError("FAILED TO GET \(key) from configuration files!")
+        }
+        
+        return token!
     }
 }

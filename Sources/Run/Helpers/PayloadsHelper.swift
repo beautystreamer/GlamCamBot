@@ -68,6 +68,13 @@ public extension Droplet {
         return elements
     }
     
+    func carouselElement(title: String, subtitle: String, buttons: [[String: Any]]) -> [String: Any] {
+        let elements: [String : Any] = ["title": title,
+                                        "subtitle": subtitle,
+                                        "buttons": buttons]
+        return elements
+    }
+    
     func broadcastCreativeMessageJSON(title: String, imageUrl: String, subtitle: String, linkUrl: String, linkTitle: String) -> [String: Any] {
         let button = ["type": "web_url", "url": linkUrl, "title": linkTitle]
         let elements: [String : Any] = ["title": title,

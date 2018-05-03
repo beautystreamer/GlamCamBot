@@ -11,11 +11,11 @@ class Reply {
     }
     
     public static func getYes() -> [String: Any] {
-        return ["content_type": "text", "title": "Let's do it", "payload": QUICK_REPLY_YES_PAYMENT]
+        return ["content_type": "text", "title": "Let's do it", "payload": POSTBACK_YES_PAYMENT]
     }
     
     public static func getNo() -> [String: Any] {
-        return ["content_type": "text", "title": "No, thanks", "payload": QUICK_REPLY_NO_PAYMENT]
+        return ["content_type": "text", "title": "No, thanks", "payload": POSTBACK_NO_PAYMENT]
     }
     
     public static func showProducts() -> [String: Any] {
