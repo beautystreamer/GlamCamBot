@@ -148,7 +148,7 @@ final class TestBroadcast: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        for fbId in hannalee_giveaway_may_1_30d{
+        for fbId in hannaLeeTestLilia{
             drop.send(message: "Check out six lucky giveaway winners", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
             let winnersImageUrl = "https://app.box.com/shared/static/wgi9fvipjlu933cupqdmjvk83ursggxl.png"
             guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
