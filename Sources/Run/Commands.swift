@@ -72,7 +72,7 @@ final class TestPayments: Command, ConfigInitializable {
         //            return
         //        }
         //let fbId = arguments[0]
-        for fbId in hannaLeeTestLilia{
+        for fbId in hannaLeeTestLiliaStaging{
             
             let price = "50"
             
