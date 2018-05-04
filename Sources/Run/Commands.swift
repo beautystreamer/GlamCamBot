@@ -75,17 +75,18 @@ final class TestPayments: Command, ConfigInitializable {
         for fbId in hannaLeeTestLilia{
             
             let price = "50"
-            let spot = 2
             
-            drop.send(message: "Hannalee has chosen you to be on the next show! Spring makeup",
+            drop.send(message: "Great news, Hanna is hosting a private makeup class with four guests",
                       senderId: fbId,
                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+            drop.send(message: "Grab one of the two spots left.....",
+                      senderId: fbId,
+                      messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+            let title = "Sign up and pay $\(price) to join the class"
             
-            let title = "You have an hour to claim your spot for $\(price) ... "
-            
-            let subtitle = "There are only \(spot.string) spots left"
-            let buttonYes = ["type": "postback", "title": "Let's do it", "payload": POSTBACK_YES_PAYMENT]
-            let buttonNo = ["type": "postback", "title": "No, thanks", "payload": POSTBACK_NO_PAYMENT]
+            let subtitle = ""
+            let buttonYes = ["type": "postback", "title": "I'd love to", "payload": POSTBACK_YES_PAYMENT]
+            let buttonNo = ["type": "postback", "title": "No thanks", "payload": POSTBACK_NO_PAYMENT]
             //let url = "https://app.box.com/shared/static/rlk1ig77xlmfon8psaohat2m0ryji471.png"
             let elements = drop.carouselElement(title: title, subtitle: subtitle, buttons: [buttonYes, buttonNo])
             drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
