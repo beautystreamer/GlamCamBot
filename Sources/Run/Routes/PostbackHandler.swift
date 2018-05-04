@@ -155,15 +155,21 @@ extension Droplet {
         
         let botHostName = getBotHostName(config)
         
-        let url = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)"
+        let url = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)&event=1"
+        let url2 = "\(botHostName)/web?host=\(host)&user_id=\(subscriber.fb_messenger_id)&price=\(price)&product=\(product)&event=2"
         
-        let buttonClaimSpot = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Claim your spot now"]
-        let pollResults = drop.carouselElement(title: "Join Hanna Lee show",
+        let buttonClaimSpot = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Book the class"]
+        let buttonClaimSpot2 = ["type": "web_url", "url": url2, "messenger_extensions": "true", "title": "Book the class"]
+        let pollResults = drop.carouselElement(title: "Friday May 17th 7pm",
                                                imageUrl: imageUrl,
                                                subtitle: "for only \(price)$ you can be on the next show",
             button: buttonClaimSpot)
+        let pollResults2 = drop.carouselElement(title: "Monday May 12th 7pm",
+                                               imageUrl: imageUrl,
+                                               subtitle: "for only \(price)$ you can be on the next show",
+            button: buttonClaimSpot2)
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
-        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults, pollResults2]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
