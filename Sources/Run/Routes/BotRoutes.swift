@@ -134,6 +134,11 @@ extension Droplet {
                 
             }
             
+            guard let event = req.data["event"]?.int else {
+                analytics?.logError("Failed to fetch and event id in \(req.data)")
+                throw Abort.badRequest
+            }
+            
             guard let subscriber = try self.getUserProfile(senderId: senderId) else {
                 analytics?.logError("Failed to find \(senderId) for purchase flow")
                 throw Abort.notFound
@@ -151,6 +156,7 @@ extension Droplet {
                                                     host: host,
                                                     price: price,
                                                     email: email,
+                                                    event: event,
                                                     remember: remember)
         }
     }
