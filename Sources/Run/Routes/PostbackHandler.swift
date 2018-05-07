@@ -162,11 +162,11 @@ extension Droplet {
         let buttonClaimSpot2 = ["type": "web_url", "url": url2, "messenger_extensions": "true", "title": "Book the class"]
         let pollResults = drop.carouselElement(title: "Friday May 17th 7pm",
                                                imageUrl: imageUrl,
-                                               subtitle: "for only \(price)$ you can be on the next show",
+                                               subtitle: "for only \(price)$ you can be on the class",
             button: buttonClaimSpot)
         let pollResults2 = drop.carouselElement(title: "Monday May 12th 7pm",
                                                imageUrl: imageUrl,
-                                               subtitle: "for only \(price)$ you can be on the next show",
+                                               subtitle: "for only \(price)$ you can be on the class",
             button: buttonClaimSpot2)
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [pollResults, pollResults2]),

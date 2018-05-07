@@ -89,6 +89,7 @@ extension Droplet {
                                  host: String,
                                  price: String,
                                  email: String?,
+                                 event: Int,
                                  remember: Bool) throws -> Response {
         guard let result = stripeClient?.processChargeFor(subscriber: subscriber,
                                                           token: token,
@@ -98,17 +99,19 @@ extension Droplet {
             return Response(status: .noContent, body: "")
         }
         
-        guard result.status == .ok else {
+        if result.status != .ok {
             let message = result.json?["error.message"]?.string  ?? "Unknown error, please try later"
             var errorDict = subscriber.toDictionary()
             errorDict["message"] = message
             analytics?.logResponse(result, endpoint: "stripe", dict: errorDict)
             return Response(status: result.status, body: message.makeBody())
         }
-
-        self.send(message: "EAH!!! You’re on the next show! We will reach out with a few potential times", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        
-        return result
+        else
+        {
+            analytics?.logAnalytics(event: .CompletedToPurchaseTheShow, for: subscriber, eventValue: event.string)
+            self.send(message: "EAH!!! You’re on the next show! We will reach out with a few potential times", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+            return result
+        }
     }
     
 }
