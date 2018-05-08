@@ -161,13 +161,13 @@ extension Droplet {
         let buttonBookClassOne = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Book the class"]
         let buttonBookClassTwo = ["type": "web_url", "url": url2, "messenger_extensions": "true", "title": "Book the class"]
         let bookClassOne = drop.carouselElement(title: "Friday May 17th 7pm",
-                                               imageUrl: imageUrl,
-                                               subtitle: "for only \(price)$ you can be on the class",
-                                               button: buttonBookClassOne)
+                                                imageUrl: imageUrl,
+                                                subtitle: "for only \(price)$ you can be on the class",
+            webViewHeightRatio: "compact", button: buttonBookClassOne)
         let bookClassTwo = drop.carouselElement(title: "Monday May 12th 7pm",
-                                               imageUrl: imageUrl,
-                                               subtitle: "for only \(price)$ you can be on the class",
-                                               button: buttonBookClassTwo)
+                                                imageUrl: imageUrl,
+                                                subtitle: "for only \(price)$ you can be on the class",
+            webViewHeightRatio: "compact", button: buttonBookClassTwo)
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
         
         drop.send(attachment: drop.genericAttachment(elements: [bookClassOne, bookClassTwo]),
