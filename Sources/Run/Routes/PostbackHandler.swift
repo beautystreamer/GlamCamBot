@@ -163,14 +163,13 @@ extension Droplet {
         let bookClassOne = drop.carouselElement(title: "Friday May 17th 7pm",
                                                 imageUrl: imageUrl,
                                                 subtitle: "for only \(price)$ you can be on the class",
-            webViewHeightRatio: "tall", button: buttonBookClassOne)
+            button: buttonBookClassOne)
         let bookClassTwo = drop.carouselElement(title: "Monday May 12th 7pm",
                                                 imageUrl: imageUrl,
                                                 subtitle: "for only \(price)$ you can be on the class",
-            webViewHeightRatio: "tall", button: buttonBookClassTwo)
+            button: buttonBookClassTwo)
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
-        
-        drop.send(attachment: drop.genericAttachment(elements: [bookClassOne, bookClassTwo]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [bookClassOne, bookClassTwo]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }

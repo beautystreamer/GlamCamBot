@@ -60,15 +60,6 @@ public extension Droplet {
         return elements
     }
     
-    func carouselElement(title: String, imageUrl: String, subtitle: String, webViewHeightRatio: String, button: [String: Any]) -> [String: Any] {
-        let elements: [String : Any] = ["title": title,
-                                        "subtitle": subtitle,
-                                        "image_url": imageUrl,
-                                        "webview_height_ratio": webViewHeightRatio,
-                                        "buttons": [button]]
-        return elements
-    }
-    
     func carouselElement(title: String, imageUrl: String, subtitle: String, buttons: [[String: Any]]) -> [String: Any] {
         let elements: [String : Any] = ["title": title,
                                         "subtitle": subtitle,
