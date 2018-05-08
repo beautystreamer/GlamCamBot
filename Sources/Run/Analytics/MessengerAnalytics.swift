@@ -19,6 +19,8 @@ public enum AnalyticsEvent: String {
     case StartedToPurchaseTheShow = "started_to_purchase_the_show"
     case RefusedToPurchaseTheShow = "refused_to_purchase_the_show"
     case CompletedToPurchaseTheShow = "completed_to_purchase_the_show"
+    case RefusedToSeeShoppingList = "refused_to_see_shopping_list"
+    case AgreedToSeeShoppingList = "agreed_to_see_shopping_list"
 }
 
 public class MessengerAnalytics {
