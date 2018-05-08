@@ -67,11 +67,12 @@ final class TestPayments: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        //        guard arguments.count > 0 else {
-        //            analytics?.logError("Missed argument: facebookId")
-        //            return
-        //        }
-        //let fbId = arguments[0]
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
+        let fbId = arguments[0]
+        
         for fbId in hannaLeeTestLiliaStaging{
             
             let price = "50"
