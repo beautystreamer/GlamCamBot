@@ -99,18 +99,18 @@ extension Droplet {
             return Response(status: .noContent, body: "")
         }
         
-        if result.status != .ok {
+        if result.status == .ok {
+            analytics?.logAnalytics(event: .CompletedToPurchaseTheShow, for: subscriber, eventValue: event.string)
+            self.send(message: "YEAH!!! You’re on the next show! We will reach out with a few potential times", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+            return result
+        }
+        else
+        {
             let message = result.json?["error.message"]?.string  ?? "Unknown error, please try later"
             var errorDict = subscriber.toDictionary()
             errorDict["message"] = message
             analytics?.logResponse(result, endpoint: "stripe", dict: errorDict)
             return Response(status: result.status, body: message.makeBody())
-        }
-        else
-        {
-            analytics?.logAnalytics(event: .CompletedToPurchaseTheShow, for: subscriber, eventValue: event.string)
-            self.send(message: "EAH!!! You’re on the next show! We will reach out with a few potential times", senderId: subscriber.fb_messenger_id, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-            return result
         }
     }
     

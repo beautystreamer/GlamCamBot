@@ -9,9 +9,6 @@ import HTTP
 let NOTIFICATION_HOUR = 9
 let SECONDS_IN_HOUR: TimeInterval = 60 * 60
 
-let fbIdLilia = "1967947763279176"
-let fbIdDmitry = "1547115702068142"
-
 final class CreateSessionCommand: Command, ConfigInitializable {
     public let id = "create_session"
     public let help = ["This command creates opentok session for live video user"]
@@ -71,9 +68,9 @@ final class TestPayments: Command, ConfigInitializable {
             analytics?.logError("Missed argument: facebookId")
             return
         }
-        let fbId = arguments[0]
+        let testArray = [arguments[0]]
         
-        for fbId in hannaLeeTestLiliaStaging{
+        for fbId in testArray{
             
             let price = "50"
             
@@ -102,7 +99,6 @@ final class TestShopping: Command, ConfigInitializable {
     public let id = "do_shopping"
     public let help = ["This command does shopping experience"]
     public let console: ConsoleProtocol
-    private let fbId = fbIdLilia
     
     public init(console: ConsoleProtocol) {
         self.console = console
@@ -138,7 +134,6 @@ final class TestBroadcast: Command, ConfigInitializable {
     public let id = "test_command"
     public let help = ["This command does things, like foo, and bar."]
     public let console: ConsoleProtocol
-    private let fbId = fbIdLilia
     
     public init(console: ConsoleProtocol) {
         self.console = console
