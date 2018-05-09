@@ -121,7 +121,7 @@ final class TestShopping: Command, ConfigInitializable {
         let title = "I'm sure you'd love to know all the products Hanna used today"
         let subtitle = ""
         let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
-        let buttonNo = ["type": "postback", "title": "No", "payload": POSTBACK_NO_PAYMENT]
+        let buttonNo = ["type": "postback", "title": "No", "payload": POSTBACK_DONT_SHOW_ME_PRODUCTS]
         let url = "https://app.box.com/shared/static/rlk1ig77xlmfon8psaohat2m0ryji471.png"
         let elements = drop.carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttons: [buttonYes, buttonNo])
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),

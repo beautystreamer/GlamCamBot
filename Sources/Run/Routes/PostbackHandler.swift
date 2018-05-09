@@ -15,6 +15,8 @@ extension Droplet {
             handleUnsubscribeResubscribe(subscriber: subscriber)
         } else if postback == POSTBACK_SHOW_ME_PRODUCTS {
             handleShowProducts(subscriber: subscriber)
+        } else if postback == POSTBACK_DONT_SHOW_ME_PRODUCTS {
+            handleDontShowProducts(subscriber: subscriber)
         } else if postback == POSTBACK_YES_PAYMENT{
             handlePaymentToWeb(subscriber: subscriber)
         } else if postback == POSTBACK_NO_PAYMENT{
@@ -160,11 +162,11 @@ extension Droplet {
         
         let buttonBookClassOne = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Book the class"]
         let buttonBookClassTwo = ["type": "web_url", "url": url2, "messenger_extensions": "true", "title": "Book the class"]
-        let bookClassOne = drop.carouselElement(title: "Friday May 17th 7pm",
+        let bookClassOne = drop.carouselElement(title: "Friday May 11th 6pm CT",
                                                 imageUrl: imageUrl,
                                                 subtitle: "for only \(price)$ you can be on the class",
             button: buttonBookClassOne)
-        let bookClassTwo = drop.carouselElement(title: "Monday May 12th 7pm",
+        let bookClassTwo = drop.carouselElement(title: "Saturday May 12 4pm CT",
                                                 imageUrl: imageUrl,
                                                 subtitle: "for only \(price)$ you can be on the class",
             button: buttonBookClassTwo)
@@ -176,6 +178,13 @@ extension Droplet {
     
     func handleNoPayment(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToPurchaseTheShow, for: subscriber)
+        drop.send(message: "No worries",
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+    }
+    
+    func handleDontShowProducts(subscriber: Subscriber){
+        analytics?.logAnalytics(event: .RefusedToSeeShoppingList, for: subscriber)
         drop.send(message: "No worries",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
