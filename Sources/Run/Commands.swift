@@ -110,14 +110,14 @@ final class TestShopping: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-        guard arguments.count > 0 else {
-            analytics?.logError("Missed argument: facebookId")
-            return
-        }
-
-        let fbId = arguments[0]
+//        guard arguments.count > 0 else {
+//            analytics?.logError("Missed argument: facebookId")
+//            return
+//        }
+//
+//        let fbId = arguments[0]
         
-        //for fbId in tailorMadeJaneShopping{
+        for fbId in tailorMadeJaneShopping{
         let subscriber = drop.getSubOrUserProfileFor(senderId: fbId)
         if let response = drop.send(message: "Thanks for watching yesterday! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .RESPONSE), response.status != .ok {
             analytics?.logAnalytics(event: .BroadcastUndeliveredEvent, for: subscriber!)
@@ -136,7 +136,7 @@ final class TestShopping: Command, ConfigInitializable {
                   senderId: fbId,
                   messagingType: .RESPONSE)
             
-        //}
+        }
     }
 }
 
