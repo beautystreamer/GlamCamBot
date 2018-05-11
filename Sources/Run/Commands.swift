@@ -119,14 +119,14 @@ final class TestShopping: Command, ConfigInitializable {
         
         for fbId in tailorMadeJaneShopping{
         let subscriber = drop.getSubOrUserProfileFor(senderId: fbId)
-        if let response = drop.send(message: "Thanks for watching today! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION), response.status != .ok {
+        if let response = drop.send(message: "Thanks for watching yesterday! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION), response.status != .ok {
             analytics?.logAnalytics(event: .BroadcastUndeliveredEvent, for: subscriber!)
         } else {
             analytics?.logAnalytics(event: .BroadcastDeliveredEvent, for: subscriber!)
         }
         
-        drop.send(message: "In the meantime this is Tailor’s final look from today’s show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        let title = "I'm sure you'd love to know all the products Tailor used today"
+        drop.send(message: "In the meantime this is Tailor’s final look from yesterday's show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        let title = "I'm sure you'd love to know all the products Tailor used yesterday"
         let subtitle = ""
         let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
         let buttonNo = ["type": "postback", "title": "No", "payload": POSTBACK_DONT_SHOW_ME_PRODUCTS]
