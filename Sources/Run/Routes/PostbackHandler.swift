@@ -173,7 +173,7 @@ extension Droplet {
         let buttonBuyNowFive = ["type": "web_url", "title": "Buy on Amazon", "url": urlFive]
         let productFive = drop.carouselElement(title: titleFive, imageUrl: imgUrlFive, subtitle: subtitleFive, buttons: [buttonBuyNowFive])
         
-        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [productOne, productTwo, productThree, productFour, productFive]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [productTwo, productOne, productThree, productFour, productFive]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }
