@@ -175,7 +175,7 @@ extension Droplet {
         
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [productOne, productTwo, productThree, productFour, productFive]),
                   senderId: subscriber.fb_messenger_id,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
     }
     
     func handlePaymentToWeb(subscriber: Subscriber){
@@ -202,21 +202,21 @@ extension Droplet {
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [bookClassOne, bookClassTwo]),
                   senderId: subscriber.fb_messenger_id,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
     }
     
     func handleNoPayment(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToPurchaseTheShow, for: subscriber)
         drop.send(message: "No worries",
                   senderId: subscriber.fb_messenger_id,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
     }
     
     func handleDontShowProducts(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToSeeShoppingList, for: subscriber)
         drop.send(message: "No worries",
                   senderId: subscriber.fb_messenger_id,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
     }
     
     func getBotHostName(_ config: Config) -> String {

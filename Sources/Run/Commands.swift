@@ -110,22 +110,22 @@ final class TestShopping: Command, ConfigInitializable {
     }
     
     public func run(arguments: [String]) throws {
-//        guard arguments.count > 0 else {
-//            analytics?.logError("Missed argument: facebookId")
-//            return
-//        }
-//
-//        let fbId = arguments[0]
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebookId")
+            return
+        }
+
+        let fbId = arguments[0]
         
-        for fbId in tailorMadeJaneShopping{
+        //for fbId in tailorMadeJaneShopping{
         let subscriber = drop.getSubOrUserProfileFor(senderId: fbId)
-        if let response = drop.send(message: "Thanks for watching yesterday! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION), response.status != .ok {
+        if let response = drop.send(message: "Thanks for watching yesterday! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .RESPONSE), response.status != .ok {
             analytics?.logAnalytics(event: .BroadcastUndeliveredEvent, for: subscriber!)
         } else {
             analytics?.logAnalytics(event: .BroadcastDeliveredEvent, for: subscriber!)
         }
         
-        drop.send(message: "In the meantime this is Tailor’s final look from yesterday's show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "In the meantime this is Tailor’s final look from yesterday's show", senderId: fbId, messagingType: .RESPONSE)
         let title = "I'm sure you'd love to know all the products Tailor used yesterday"
         let subtitle = ""
         let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
@@ -134,9 +134,9 @@ final class TestShopping: Command, ConfigInitializable {
         let elements = drop.carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttons: [buttonYes, buttonNo])
         drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
                   senderId: fbId,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
             
-        }
+        //}
     }
 }
 

@@ -33,6 +33,6 @@ extension Droplet {
         let attachment = drop.genericAttachment(elements: [element])
         drop.send(attachment: attachment,
                   senderId: subscriber.fb_messenger_id,
-                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+                  messagingType: .RESPONSE)
     }
 }
