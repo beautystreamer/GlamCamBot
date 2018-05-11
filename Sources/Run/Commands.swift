@@ -117,15 +117,15 @@ final class TestShopping: Command, ConfigInitializable {
         
         let fbId = arguments[0]
         
-        drop.send(message: "Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-        drop.send(message: "in the mean time this is Tailor’s final look from today’s show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "Thanks for watching today! Giveaway winners will be announced tomorrow!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        drop.send(message: "In the meantime this is Tailor’s final look from today’s show", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         let title = "I'm sure you'd love to know all the products Tailor used today"
         let subtitle = ""
         let buttonYes = ["type": "postback", "title": "Yes", "payload": POSTBACK_SHOW_ME_PRODUCTS]
         let buttonNo = ["type": "postback", "title": "No", "payload": POSTBACK_DONT_SHOW_ME_PRODUCTS]
         let url = "https://app.box.com/shared/static/kw8hdefi95xayzrt6kjwddu5q3l0vdj1.png"
         let elements = drop.carouselElement(title: title, imageUrl: url, subtitle: subtitle, buttons: [buttonYes, buttonNo])
-        drop.send(attachment: drop.genericAttachment(elements: [elements]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
                   senderId: fbId,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
