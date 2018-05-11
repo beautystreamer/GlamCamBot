@@ -140,35 +140,35 @@ extension Droplet {
         
         let urlOne = "https://amzn.to/2KbW5LT"
         let titleOne = "Anastasia Beverly Hills - DIPBROW Pomade - Ebony"
-        let subtitleOne = "$18"
+        let subtitleOne = ""
         let imgUrlOne = "https://app.box.com/shared/static/hxl2fc6gmzahq8ndld20ix4kxoqh1a6k.jpg"
         let buttonBuyNowOne = ["type": "web_url", "title": "Buy on Amazon", "url": urlOne]
         let productOne = drop.carouselElement(title: titleOne, imageUrl: imgUrlOne, subtitle: subtitleOne, buttons: [buttonBuyNowOne])
         
         let urlTwo = "https://amzn.to/2Iz3GHl"
         let titleTwo = "Anastasia Beverly Hills - Stick Foundation - Ebony"
-        let subtitleTwo = "$25"
+        let subtitleTwo = ""
         let imgUrlTwo = "https://app.box.com/shared/static/sl5ws906mdapauwrtmkrlvoloeim4uhk.jpg"
         let buttonBuyNowTwo = ["type": "web_url", "title": "Buy on Amazon", "url": urlTwo]
         let productTwo = drop.carouselElement(title: titleTwo, imageUrl: imgUrlTwo, subtitle: subtitleTwo, buttons: [buttonBuyNowTwo])
         
         let urlThree = "https://amzn.to/2Id2fLa"
         let titleThree = "Anastasia Beverly Hills - Blush Trios - Berry Adore"
-        let subtitleThree = "$30"
+        let subtitleThree = ""
         let imgUrlThree = "https://app.box.com/shared/static/esgr2hcqk2oqwbp3cga47btimxjjp63u.jpg"
         let buttonBuyNowThree = ["type": "web_url", "title": "Buy on Amazon", "url": urlThree]
         let productThree = drop.carouselElement(title: titleThree, imageUrl: imgUrlThree, subtitle: subtitleThree, buttons: [buttonBuyNowThree])
         
         let urlFour = "https://amzn.to/2Id2K80"
         let titleFour = "NARS Natural Radiant Longwear Foundation - Macao"
-        let subtitleFour = "$81.20"
+        let subtitleFour = ""
         let imgUrlFour = "https://app.box.com/shared/static/5wv2ixv6kymdogy1akwapuhtbr2t2u63.jpg"
         let buttonBuyNowFour = ["type": "web_url", "title": "Buy on Amazon", "url": urlFour]
         let productFour = drop.carouselElement(title: titleFour, imageUrl: imgUrlFour, subtitle: subtitleFour, buttons: [buttonBuyNowFour])
         
         let urlFive = "https://amzn.to/2wuGftT"
         let titleFive = "MAC Pro Longwear Powder/Pressed Dark Deep 0.39oz/11g"
-        let subtitleFive = "$29.99"
+        let subtitleFive = ""
         let imgUrlFive = "https://app.box.com/shared/static/he856emm86tbamkv73q0909zgjb39y98.jpg"
         let buttonBuyNowFive = ["type": "web_url", "title": "Buy on Amazon", "url": urlFive]
         let productFive = drop.carouselElement(title: titleFive, imageUrl: imgUrlFive, subtitle: subtitleFive, buttons: [buttonBuyNowFive])
