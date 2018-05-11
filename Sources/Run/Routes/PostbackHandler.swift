@@ -138,35 +138,42 @@ extension Droplet {
     public func handleShowProducts(subscriber: Subscriber){
         analytics?.logAnalytics(event: .AgreedToSeeShoppingList, for: subscriber)
         
-        let urlOne = "https://www.amazon.com/gp/product/B00H5972IC/ref=as_li_tl?ie=UTF8&tag=liveads00-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00H5972IC&linkId=b622c4fd128c6191daf264c4246a095f&th=1"
+        let urlOne = "https://amzn.to/2KbW5LT"
         let titleOne = "Anastasia Beverly Hills - DIPBROW Pomade - Ebony"
         let subtitleOne = "$18"
-        let imgUrlOne = "https://images-na.ssl-images-amazon.com/images/I/61KrJo%2B4EWL._SX522_.jpg"
+        let imgUrlOne = "https://app.box.com/shared/static/hxl2fc6gmzahq8ndld20ix4kxoqh1a6k.jpg"
         let buttonBuyNowOne = ["type": "web_url", "title": "BUY NOW", "url": urlOne]
         let productOne = drop.carouselElement(title: titleOne, imageUrl: imgUrlOne, subtitle: subtitleOne, buttons: [buttonBuyNowOne])
         
-        let urlTwo = "https://www.amazon.com/gp/product/B06X15QXKV/ref=as_li_tl?ie=UTF8&tag=liveads00-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B06X15QXKV&linkId=11a643dce7d8f4c598d7eef8e2bf56ac&th=1"
+        let urlTwo = "https://amzn.to/2Iz3GHl"
         let titleTwo = "Anastasia Beverly Hills - Stick Foundation - Ebony"
         let subtitleTwo = "$25"
-        let imgUrlTwo = "https://images-na.ssl-images-amazon.com/images/I/71r-BGjqCWL._SX522_.jpg"
+        let imgUrlTwo = "https://app.box.com/shared/static/sl5ws906mdapauwrtmkrlvoloeim4uhk.jpg"
         let buttonBuyNowTwo = ["type": "web_url", "title": "BUY NOW", "url": urlTwo]
         let productTwo = drop.carouselElement(title: titleTwo, imageUrl: imgUrlTwo, subtitle: subtitleTwo, buttons: [buttonBuyNowTwo])
         
-        let urlThree = "https://www.amazon.com/gp/product/B073GWGQZC/ref=as_li_tl?ie=UTF8&tag=liveads00-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B073GWGQZC&linkId=5b7e7d5f1d172d5f5f1a33718873d4d8&th=1"
+        let urlThree = "https://amzn.to/2Id2fLa"
         let titleThree = "Anastasia Beverly Hills - Blush Trios - Berry Adore"
         let subtitleThree = "$30"
-        let imgUrlThree = "https://images-na.ssl-images-amazon.com/images/I/513AvKtSpgL.jpg"
+        let imgUrlThree = "https://app.box.com/shared/static/esgr2hcqk2oqwbp3cga47btimxjjp63u.jpg"
         let buttonBuyNowThree = ["type": "web_url", "title": "BUY NOW", "url": urlThree]
         let productThree = drop.carouselElement(title: titleThree, imageUrl: imgUrlThree, subtitle: subtitleThree, buttons: [buttonBuyNowThree])
         
-        let urlFour = "https://www.amazon.com/gp/product/B078QYQ3N6/ref=as_li_tl?ie=UTF8&tag=liveads00-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B078QYQ3N6&linkId=18e837b96f3d8e232776575dd6a9a68d"
+        let urlFour = "https://amzn.to/2Id2K80"
         let titleFour = "NARS Natural Radiant Longwear Foundation - Macao"
         let subtitleFour = "$81.20"
-        let imgUrlFour = "https://images-na.ssl-images-amazon.com/images/I/61TJstmp7LL._SY679_.jpg"
+        let imgUrlFour = "https://app.box.com/shared/static/5wv2ixv6kymdogy1akwapuhtbr2t2u63.jpg"
         let buttonBuyNowFour = ["type": "web_url", "title": "BUY NOW", "url": urlFour]
         let productFour = drop.carouselElement(title: titleFour, imageUrl: imgUrlFour, subtitle: subtitleFour, buttons: [buttonBuyNowFour])
         
-        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [productOne, productTwo, productThree, productFour]),
+        let urlFive = "https://amzn.to/2wuGftT"
+        let titleFive = "MAC Pro Longwear Powder/Pressed Dark Deep 0.39oz/11g"
+        let subtitleFive = "$29.99"
+        let imgUrlFive = "https://app.box.com/shared/static/he856emm86tbamkv73q0909zgjb39y98.jpg"
+        let buttonBuyNowFive = ["type": "web_url", "title": "BUY NOW", "url": urlFive]
+        let productFive = drop.carouselElement(title: titleFive, imageUrl: imgUrlFive, subtitle: subtitleFive, buttons: [buttonBuyNowFive])
+        
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [productOne, productTwo, productThree, productFour, productFive]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
     }
