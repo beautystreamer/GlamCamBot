@@ -180,7 +180,7 @@ extension Droplet {
     
     func handlePaymentToWeb(subscriber: Subscriber){
         let host = "hannalee"
-        let price = "39.99"
+        let price = "30"
         let product = "hannalee_session20"
         let imageUrl = "https://app.box.com/shared/static/1diiwqna8vsnkvb9yi2ottn981qhdo94.png"
         
