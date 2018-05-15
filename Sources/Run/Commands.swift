@@ -83,7 +83,7 @@ final class TestPayments: Command, ConfigInitializable {
             drop.send(message: "Grab one of the two spots left.....",
                       senderId: fbId,
                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-            let title = "Special discount during the next 24 hours, $50 instead of $100"
+            let title = "Special discount during the next 24 hours, $39.99 instead of $100"
             let subtitle = ""
             let buttonYes = ["type": "postback", "title": "I'd love to", "payload": POSTBACK_YES_PAYMENT]
             let buttonNo = ["type": "postback", "title": "No thanks", "payload": POSTBACK_NO_PAYMENT]
