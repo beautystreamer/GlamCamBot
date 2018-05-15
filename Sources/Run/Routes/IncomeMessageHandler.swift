@@ -23,11 +23,21 @@ extension Droplet {
                     analytics?.logError("Failed to proccess the shopping flow: \(error)")
                     return
                 }
+            } else if SubscriberStatus.isUnsubscribeMessage(message) {
+                analytics?.logDebug("Entered - unsubscribe selected flow. Unsubscribe user if needed.")
+                subscriber.setStatus(SubscriberStatus.unsubscribed)
+                subscriber.saveIfNedeed()
+                let message = "You just unsubscribed from notifications. To resubscribe, type \"subscribe\"."
+                self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+            } else if SubscriberStatus.isSubscribeMessage(message) {
+                analytics?.logDebug("Entered - subscribe selected flow. Subscribe user if needed.")
+                let message = "You are subscribed."
+                subscriber.setStatus(SubscriberStatus.subscribed)
+                subscriber.saveIfNedeed()
+                self.send(message: message, senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+            } else {
+                analytics?.logDebug("Entered - unrecognized message")
             }
-//            self.send(message: "I'm not sure what you mean, try saying \"Go\"",
-//                      senderId: subscriber.fb_messenger_id,
-//                      messagingType: .RESPONSE)
-            
         } else {
             analytics?.logDebug("Entered - incoming message is nil. Ignore this message.")
         }
