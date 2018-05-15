@@ -70,10 +70,9 @@ final class TestPayments: Command, ConfigInitializable {
         }
         let testArray = [arguments[0]]
         
-        for fbId in hannaLeeTest{
+        for fbId in hannaLeeTestLilia{
             let imgUrl = "https://app.box.com/shared/static/9yue2cgiy7859sd7a2j6cr80qa1t0y7t.png"
             let imgMessage = drop.genericUploadMessage(type: "image", url: imgUrl)
-            print(imgMessage)
             
             drop.sendImage(message: imgMessage,
                       senderId: fbId,

@@ -191,16 +191,16 @@ extension Droplet {
         
         let buttonBookClassOne = ["type": "web_url", "url": url, "messenger_extensions": "true", "title": "Book Your Class"]
         let buttonBookClassTwo = ["type": "web_url", "url": url2, "messenger_extensions": "true", "title": "Book Your Class"]
-        let bookClassOne = drop.carouselElement(title: "Friday May 11th 6pm CT",
+        let bookClassOne = drop.carouselElement(title: "Thursday 7pm CST",
                                                 imageUrl: imageUrl,
                                                 subtitle: "for only \(price)$ you can join the class",
             button: buttonBookClassOne)
-        let bookClassTwo = drop.carouselElement(title: "Saturday May 12 4pm CT",
-                                                imageUrl: imageUrl,
-                                                subtitle: "for only \(price)$ you can join the class",
-            button: buttonBookClassTwo)
+//        let bookClassTwo = drop.carouselElement(title: "Saturday May 12 4pm CT",
+//                                                imageUrl: imageUrl,
+//                                                subtitle: "for only \(price)$ you can join the class",
+//            button: buttonBookClassTwo)
         analytics?.logAnalytics(event: .StartedToPurchaseTheShow, for: subscriber)
-        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [bookClassOne, bookClassTwo]),
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [bookClassOne]),
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }
