@@ -70,7 +70,7 @@ final class TestPayments: Command, ConfigInitializable {
         }
         let testArray = [arguments[0]]
         
-        for fbId in testArray{
+        for fbId in hannaLeePayments200{
             let imgUrl = "https://app.box.com/shared/static/9yue2cgiy7859sd7a2j6cr80qa1t0y7t.png"
             let imgMessage = drop.genericUploadMessage(type: "image", url: imgUrl)
             
@@ -92,6 +92,8 @@ final class TestPayments: Command, ConfigInitializable {
                       senderId: fbId,
                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         }
+        
+        print("The boradcast is finished.")
     
     }
 }
