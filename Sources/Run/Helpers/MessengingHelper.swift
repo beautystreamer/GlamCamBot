@@ -22,6 +22,10 @@ extension Droplet {
         return send(messageJSON: textJSON, senderId: senderId, messagingType: messagingType)
     }
     
+    @discardableResult func sendImage(message: [String: Any], senderId: String, messagingType: MessagingType, quickReplies: [[String: Any]]? = nil) -> Response? {
+        return send(messageJSON: message, senderId: senderId, messagingType: messagingType)
+    }
+    
     @discardableResult func send(attachment: [String: Any], senderId: String, messagingType: MessagingType, quickReplies: [[String: Any]]? = nil) -> Response? {
         
         var attachmentJSON: [String: Any] = ["attachment": attachment]

@@ -6,7 +6,6 @@ public extension Droplet {
         
     func genericUploadMessage(type: String, url: String) -> [String: Any] {
         return [
-            "message": [
                 "attachment":[
                     "type":type,
                     "payload":
@@ -15,7 +14,7 @@ public extension Droplet {
                     ]
                 ]
             ]
-        ]
+        
     }
 
     func weblinkButtonTemplate(title: String, url: String) -> [String: Any] {
