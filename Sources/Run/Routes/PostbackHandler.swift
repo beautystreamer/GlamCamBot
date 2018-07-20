@@ -230,7 +230,7 @@ extension Droplet {
                   messagingType: .RESPONSE)
     }
     
-    func handleYesApp(subscriber: Subscriber){
+    func handleNoApp(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToInstallApp, for: subscriber)
         drop.send(message: "No worries, if you change your mind you can always use this link - https://glamcam1.typeform.com/to/DgVr0l",
                   senderId: subscriber.fb_messenger_id,

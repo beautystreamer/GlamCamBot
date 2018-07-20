@@ -143,7 +143,7 @@ final class TestShopping: Command, ConfigInitializable {
 }
 
 final class TestAppBroadCast: Command, ConfigInitializable {
-    public let id = "test_app"
+    public let id = "test_app_broadcast"
     public let help = ["This command broadcasts the messege about the new app"]
     public let console: ConsoleProtocol
     
@@ -159,10 +159,11 @@ final class TestAppBroadCast: Command, ConfigInitializable {
     public func run(arguments: [String]) throws {
         guard arguments.count > 0 else {
             analytics?.logError("Missed argument: facebook_id")
+            return
         }
         
-        let fb_id = arguments[0]
-        let subscriber = drop.getSubOrUserProfileFor(senderId: fb_id)
+        let fbId = arguments[0]
+        let subscriber = drop.getSubOrUserProfileFor(senderId: fbId)
         let imgUrl = "https://app.box.com/shared/static/ajeah2hrvhgmqczyjk03t87ed4yj0pv5.jpg"
         let imgMessage = drop.genericUploadMessage(type: "image", url: imgUrl)
         
@@ -170,7 +171,7 @@ final class TestAppBroadCast: Command, ConfigInitializable {
                        senderId: fbId,
                        messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
-        if let response = drop.send(message: "Hey \"name\" - it's your lucky day!! You've been chosen by our team to be one of the first 250 people to access the new GlamCam App!", senderId: subscriber, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION),
+        if let response = drop.send(message: "Hey \"name\" - it's your lucky day!! You've been chosen by our team to be one of the first 250 people to access the new GlamCam App!", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION),
             response.status != .ok {
             analytics?.logAnalytics(event: .BroadcastUndeliveredEvent, for: subscriber!)
         } else {
