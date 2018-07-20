@@ -21,6 +21,8 @@ public enum AnalyticsEvent: String {
     case CompletedToPurchaseTheShow = "completed_to_purchase_the_show"
     case RefusedToSeeShoppingList = "refused_to_see_shopping_list"
     case AgreedToSeeShoppingList = "agreed_to_see_shopping_list"
+    case AgreedToInstallApp = "agreed_to_install_app"
+    case RefusedToInstallApp = "refused_to_install_app"
     case ClicksOnTheBuyButtonFromShoppingList = "clicks_on_the_buy_button_from_shopping_list"
     case BroadcastUndeliveredEvent = "broadcast_undelivered_event"
     case BroadcastDeliveredEvent = "broadcast_delivered_event"

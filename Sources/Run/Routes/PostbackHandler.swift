@@ -17,10 +17,14 @@ extension Droplet {
             handleShowProducts(subscriber: subscriber)
         } else if postback == POSTBACK_DONT_SHOW_ME_PRODUCTS {
             handleDontShowProducts(subscriber: subscriber)
-        } else if postback == POSTBACK_YES_PAYMENT{
+        } else if postback == POSTBACK_YES_PAYMENT {
             handlePaymentToWeb(subscriber: subscriber)
-        } else if postback == POSTBACK_NO_PAYMENT{
+        } else if postback == POSTBACK_NO_PAYMENT {
             handleNoPayment(subscriber: subscriber)
+        } else if postback == POSTBACK_YES_APP {
+            handleYesApp(subscriber: subscriber)
+        } else if postback == POSTBACK_NO_APP {
+            handleNoApp(subscriber: subscriber)
         } else {
             analytics?.logDebug(postback)
         }
@@ -215,6 +219,20 @@ extension Droplet {
     func handleDontShowProducts(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToSeeShoppingList, for: subscriber)
         drop.send(message: "No worries",
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .RESPONSE)
+    }
+    
+    func handleYesApp(subscriber: Subscriber){
+        analytics?.logAnalytics(event: .AgreedToInstallApp, for: subscriber)
+        drop.send(message: "Great! Sign up here - https://glamcam1.typeform.com/to/DgVr0l",
+                  senderId: subscriber.fb_messenger_id,
+                  messagingType: .RESPONSE)
+    }
+    
+    func handleYesApp(subscriber: Subscriber){
+        analytics?.logAnalytics(event: .RefusedToInstallApp, for: subscriber)
+        drop.send(message: "No worries, if you change your mind you can always use this link - https://glamcam1.typeform.com/to/DgVr0l",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }

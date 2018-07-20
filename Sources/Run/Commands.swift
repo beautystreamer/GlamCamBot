@@ -70,7 +70,7 @@ final class TestPayments: Command, ConfigInitializable {
         }
         let testArray = [arguments[0]]
         
-        for fbId in hannaLeePayments200{
+        for fbId in testArray{
             let imgUrl = "https://app.box.com/shared/static/9yue2cgiy7859sd7a2j6cr80qa1t0y7t.png"
             let imgMessage = drop.genericUploadMessage(type: "image", url: imgUrl)
             
@@ -138,6 +138,52 @@ final class TestShopping: Command, ConfigInitializable {
                   senderId: fbId,
                   messagingType: .RESPONSE)
             
+        
+    }
+}
+
+final class TestAppBroadCast: Command, ConfigInitializable {
+    public let id = "test_app"
+    public let help = ["This command broadcasts the messege about the new app"]
+    public let console: ConsoleProtocol
+    
+    public init(console: ConsoleProtocol) {
+        self.console = console
+    }
+    
+    public convenience init(config: Config) throws {
+        let console = try config.resolveConsole()
+        self.init(console: console)
+    }
+    
+    public func run(arguments: [String]) throws {
+        guard arguments.count > 0 else {
+            analytics?.logError("Missed argument: facebook_id")
+        }
+        
+        let fb_id = arguments[0]
+        let subscriber = drop.getSubOrUserProfileFor(senderId: fb_id)
+        let imgUrl = "https://app.box.com/shared/static/ajeah2hrvhgmqczyjk03t87ed4yj0pv5.jpg"
+        let imgMessage = drop.genericUploadMessage(type: "image", url: imgUrl)
+        
+        drop.sendImage(message: imgMessage,
+                       senderId: fbId,
+                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+        
+        if let response = drop.send(message: "Hey \"name\" - it's your lucky day!! You've been chosen by our team to be one of the first 250 people to access the new GlamCam App!", senderId: subscriber, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION),
+            response.status != .ok {
+            analytics?.logAnalytics(event: .BroadcastUndeliveredEvent, for: subscriber!)
+        } else {
+            analytics?.logAnalytics(event: .BroadcastDeliveredEvent, for: subscriber!)
+        }
+        let title = "You ready to play beauty games and win amazing products..."
+        let subtitle = ""
+        let buttonYes = ["type": "postback", "title": "I'd love to", "payload": POSTBACK_YES_APP]
+        let buttonNo = ["type": "postback", "title": "No thanks", "payload": POSTBACK_NO_APP]
+        let elements = drop.carouselElement(title: title, subtitle: subtitle, buttons: [buttonYes, buttonNo])
+        drop.send(attachment: drop.genericAttachmentImageRatioSquare(elements: [elements]),
+                  senderId: fbId,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         
     }
 }
