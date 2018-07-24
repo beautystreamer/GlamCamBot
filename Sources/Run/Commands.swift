@@ -93,7 +93,7 @@ final class TestPayments: Command, ConfigInitializable {
                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         }
         
-        print("The boradcast is finished.")
+        print("The broadcast is finished.")
     
     }
 }
@@ -195,6 +195,8 @@ final class TestAppBroadCast: Command, ConfigInitializable {
                       senderId: fbId,
                       messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
         }
+        
+        print("The broadcast is finished.")
     }
 }
 
