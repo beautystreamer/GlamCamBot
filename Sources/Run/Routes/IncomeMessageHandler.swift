@@ -23,14 +23,14 @@ extension Droplet {
                     analytics?.logError("Failed to proccess the shopping flow: \(error)")
                     return
                 }
-            } else if lowercasedMessage == "test app broadcast" {
-                let test = TestAppBroadCast(console: drop.console)
-                do {
-                    try test.run(arguments: [subscriber.fb_messenger_id])
-                } catch let error {
-                    analytics?.logError("Failed to proccess the app broadcast: \(error)")
-                    return
-                }
+//            } else if lowercasedMessage == "test app broadcast" {
+//                let test = TestAppBroadCast(console: drop.console)
+//                do {
+//                    try test.run(arguments: [subscriber.fb_messenger_id])
+//                } catch let error {
+//                    analytics?.logError("Failed to proccess the app broadcast: \(error)")
+//                    return
+//                }
             } else if SubscriberStatus.isUnsubscribeMessage(message) {
                 analytics?.logDebug("Entered - unsubscribe selected flow. Unsubscribe user if needed.")
                 subscriber.setStatus(SubscriberStatus.unsubscribed)
