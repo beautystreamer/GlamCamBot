@@ -230,9 +230,9 @@
         "package": "BotAnalytics",
         "repositoryURL": "https://github.com/bsuvorov/swiftfbbotanalytics.git",
         "state": {
-          "branch": null,
-          "revision": "1240869445f66526d57a9c32650ff3f9128544de",
-          "version": "1.0.8"
+          "branch": "1.0.3",
+          "revision": "a7cfb823d8c75116998b262c7d176fe6139db3dc",
+          "version": null
         }
       },
       {

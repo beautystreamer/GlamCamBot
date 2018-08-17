@@ -166,11 +166,11 @@ final class TestAppBroadCast: Command, ConfigInitializable {
         
         var counter = 0
         for fbId in allUsers {
-            if appBroadcasts.contains(fbId) {
+            if appBroadcastSet.contains(fbId) {
                 continue
             }
             counter += 1
-            if counter >= 200 {
+            if counter >= 2 {
                 break
             }
             
