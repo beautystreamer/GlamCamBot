@@ -225,14 +225,14 @@ extension Droplet {
     
     func handleYesApp(subscriber: Subscriber){
         analytics?.logAnalytics(event: .AgreedToInstallApp, for: subscriber)
-        drop.send(message: "Great! Sign up here - https://glamcam1.typeform.com/to/DgVr0l",
+        drop.send(message: "Great! Sign up here - https://glamcam1.typeform.com/to/LTbNtx",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }
     
     func handleNoApp(subscriber: Subscriber){
         analytics?.logAnalytics(event: .RefusedToInstallApp, for: subscriber)
-        drop.send(message: "No worries, if you change your mind you can always use this link - https://glamcam1.typeform.com/to/DgVr0l",
+        drop.send(message: "No worries, if you change your mind you can always use this link - https://glamcam1.typeform.com/to/LTbNtx",
                   senderId: subscriber.fb_messenger_id,
                   messagingType: .RESPONSE)
     }
