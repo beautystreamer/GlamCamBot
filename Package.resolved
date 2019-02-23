@@ -240,8 +240,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "f445c9067d28346e828e615e2b43cb07b20bca35",
-          "version": "1.7.2"
+          "revision": "11da8c685ddde2d519fad04a7daf8485bbbc773e",
+          "version": "1.7.5"
         }
       },
       {
@@ -249,8 +249,8 @@
         "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
         "state": {
           "branch": null,
-          "revision": "725e6c355d3b0f6f623162029c0bb88630c10a20",
-          "version": "1.6.0"
+          "revision": "78352a16ed33e53307795b46145a1c739e08fb83",
+          "version": "1.6.2"
         }
       },
       {
@@ -276,8 +276,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "9ea2ca524f05e97c599ece90da504ac3f7e26d77",
-          "version": "2.4.4"
+          "revision": "b4fcd10d565ed32ecdf8ecae98487fc6ced73254",
+          "version": "2.4.5"
         }
       }
     ]

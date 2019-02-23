@@ -13,6 +13,23 @@ public enum MessagingType: String {
 
 extension Droplet {
     
+    public static func genericButtonsAttachment(message: String, buttons: [[String: Any]]) -> [String: Any] {
+        return ["type": "template",
+                "payload":
+                    ["template_type": "button",
+                     "text": message,
+                     "buttons": buttons
+            ]
+        ]
+    }
+    
+    @discardableResult func send(message: String, senderId: String, messagingType: MessagingType, postbackButtons: [[String: Any]]) -> Response? {
+        
+        let attachment = genericButtonsAttachment(message: message, buttons: postbackButtons)
+        
+        return send(attachment: attachment, senderId: senderId, messagingType: messagingType)
+    }
+    
     @discardableResult func send(message: String, senderId: String, messagingType: MessagingType, quickReplies: [[String: Any]]? = nil) -> Response? {
         
         var textJSON: [String: Any] = ["text": message]

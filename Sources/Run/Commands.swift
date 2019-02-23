@@ -63,6 +63,7 @@ final class TestPayments: Command, ConfigInitializable {
         self.init(console: console)
     }
     
+    
     public func run(arguments: [String]) throws {
         guard arguments.count > 0 else {
             analytics?.logError("Missed argument: facebookId")
@@ -224,22 +225,42 @@ final class TestBroadcast: Command, ConfigInitializable {
         self.init(console: console)
     }
     
-    public func run(arguments: [String]) throws {
-        for fbId in hannaLeeTestLilia{
-            drop.send(message: "Check out three lucky giveaway winners", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-            let winnersImageUrl = "https://app.box.com/shared/static/0st6ms6g268zgf0ubkm32d1lj9qfuzqx.jpg"
-            guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
-                analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
-                return
-            }
-            drop.send(attachmentId: attachmentId, senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
-
-            let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
-            drop.send(message: "Do you want to be notified about other giveaways?",
-                      senderId: fbId,
-                      messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
-              quickReplies: [quickReply])
+    public func appBroadcastTest() {
+        let dmitryId = "1577826605605503"
+        let winnersImageUrl = "https://app.box.com/shared/static/reptlpw1j2o17cxc77pf6iowo8llfydd.mp4"
+        guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl, type: "video") else {
+            analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
+            return
         }
+        drop.send(attachmentId: attachmentId, senderId: dmitryId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION, type: "video")
+        
+        let message = "Hey, do you want VIP access to Glamcam, to win free makeup?"
+        let optIn = ["type": "postback", "title": "I'd love to", "payload": POSTBACK_APP_OPT_IN]
+        let optOut = ["type": "postback", "title": "No, thanks", "payload": POSTBACK_APP_OPT_OUT]
+        
+        drop.send(message: message,
+                  senderId: dmitryId,
+                  messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
+                  postbackButtons: [optIn, optOut])
+    }
+    
+    public func run(arguments: [String]) throws {
+        appBroadcastTest()
+//        for fbId in hannaLeeTestLilia{
+//            drop.send(message: "Check out three lucky giveaway winners", senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+//            let winnersImageUrl = "https://app.box.com/shared/static/0st6ms6g268zgf0ubkm32d1lj9qfuzqx.jpg"
+//            guard let attachmentId = drop.getAttachmentIdFor(url: winnersImageUrl) else {
+//                analytics?.logError("Failed to create FB attachment for \(winnersImageUrl)")
+//                return
+//            }
+//            drop.send(attachmentId: attachmentId, senderId: fbId, messagingType: .NON_PROMOTIONAL_SUBSCRIPTION)
+//
+//            let quickReply = ["content_type": "text", "title": "Sure, opt me in", "payload": "QUICK_REPLY_GIVEAWAYS_OPT_IN"]
+//            drop.send(message: "Do you want to be notified about other giveaways?",
+//                      senderId: fbId,
+//                      messagingType: .NON_PROMOTIONAL_SUBSCRIPTION,
+//              quickReplies: [quickReply])
+//        }
     }
 
 }

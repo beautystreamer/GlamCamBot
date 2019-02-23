@@ -25,6 +25,15 @@ extension Droplet {
             handleYesApp(subscriber: subscriber)
         } else if postback == POSTBACK_NO_APP {
             handleNoApp(subscriber: subscriber)
+        } else if postback == POSTBACK_APP_OPT_IN {
+            let messages = ["easy, click here to download https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8",
+                            "Use the code *Glamcamfam*"]
+            sendResponseWithTyping(messages: messages, senderId: subscriber.fb_messenger_id) {
+            }
+            
+            drop.send(message: "easy, click here to download", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+        } else if postback == POSTBACK_APP_OPT_OUT {
+            drop.send(message: "No worries... if you change your mind you can download the app here https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
         } else {
             analytics?.logDebug(postback)
         }
