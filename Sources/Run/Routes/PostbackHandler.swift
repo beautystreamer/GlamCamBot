@@ -6,7 +6,9 @@ extension Droplet {
     func handlePostback(payload: String, subscriber: Subscriber, user_ref: String?) {
         analytics?.logDebug("Payload = \(payload)")
         let postback = String(payload.split(separator: "|")[0])
-
+        let senderId = subscriber.fb_messenger_id
+        
+        
         if postback == POSTBACK_GET_STARTED {
             self.handleNewUserFlow(subscriber: subscriber, user_ref: user_ref)
         } else if postback == POSTBACK_BOT_COUNT_ME_IN {
@@ -28,12 +30,12 @@ extension Droplet {
         } else if postback == POSTBACK_APP_OPT_IN {
             let messages = ["easy, click here to download https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8",
                             "Use the code *Glamcamfam*"]
-            sendResponseWithTyping(messages: messages, senderId: subscriber.fb_messenger_id) {
+            sendResponseWithTyping(messages: messages, senderId: senderId) {[weak self] in
+                self?.sendTyping(isOn: false, senderId: senderId)
             }
             
-            drop.send(message: "easy, click here to download", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
         } else if postback == POSTBACK_APP_OPT_OUT {
-            drop.send(message: "No worries... if you change your mind you can download the app here https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8", senderId: subscriber.fb_messenger_id, messagingType: .RESPONSE)
+            drop.send(message: "No worries... if you change your mind you can download the app here https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8", senderId: senderId, messagingType: .RESPONSE)
         } else {
             analytics?.logDebug(postback)
         }
