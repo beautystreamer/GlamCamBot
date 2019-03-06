@@ -29,13 +29,17 @@ extension Droplet {
             handleNoApp(subscriber: subscriber)
         } else if postback == POSTBACK_APP_OPT_IN {
             let messages = ["easy, click here to download https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8",
-                            "Use the code *Glamcamfam*"]
+                            "Use the code Glamfam"]
             sendResponseWithTyping(messages: messages, senderId: senderId) {[weak self] in
                 self?.sendTyping(isOn: false, senderId: senderId)
             }
             
         } else if postback == POSTBACK_APP_OPT_OUT {
-            drop.send(message: "No worries... if you change your mind you can download the app here https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8", senderId: senderId, messagingType: .RESPONSE)
+            let messages = ["No worries... if you change your mind you can download the app here https://itunes.apple.com/us/app/glamcam-beauty-game-shows/id1387996543?mt=8",
+                            "Use the code Glamfam"]
+            sendResponseWithTyping(messages: messages, senderId: senderId) {[weak self] in
+                self?.sendTyping(isOn: false, senderId: senderId)
+            }
         } else {
             analytics?.logDebug(postback)
         }
